@@ -1,69 +1,130 @@
-import Image from "next/image";
-
 export default function Home() {
+  const coreServices = [
+    {
+      title: "Taxation Services",
+      description: "Expert income tax filing, GST compliance, and strategic tax planning for businesses and individuals.",
+      icon: "📊"
+    },
+    {
+      title: "Secretarial Services",
+      description: "Seamless company incorporation, ROC filings, board meeting documentation, and annual compliances.",
+      icon: "🏢"
+    },
+    {
+      title: "Legal Advisory",
+      description: "Comprehensive contract drafting, compliance reviews, and corporate legal consultation.",
+      icon: "⚖️"
+    }
+  ];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main className="min-h-screen bg-slate-50 text-slate-800">
+      {/* Navigation Header */}
+      <nav className="bg-white border-b border-slate-200 py-4 px-8 flex justify-between items-center shadow-sm">
+        <div className="font-bold text-xl text-slate-900">
+          YourFirmName <span className="text-blue-600">Advisors</span>
+        </div>
+        <div className="space-x-6 text-sm font-medium text-slate-600">
+          <a href="#services" className="hover:text-blue-600">Services</a>
+          <a href="#about" className="hover:text-blue-600">About Us</a>
+          <a href="#contact" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Book Consultation</a>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="py-20 px-8 text-center bg-gradient-to-b from-white to-slate-100 border-b border-slate-200">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-6">
+            Reliable Legal, Secretarial, & Taxation Solutions
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-lg text-slate-600 mb-8">
+            Empowering your business with precise compliance, strategic tax planning, and trusted legal guidance.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <a 
+            href="#contact" 
+            className="bg-blue-600 text-white font-medium px-8 py-3 rounded-xl shadow-lg hover:bg-blue-700 transition"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+            Schedule a Consultation
           </a>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-16 px-8 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">Our Core Practice Areas</h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          {coreServices.map((service, index) => (
+            <div key={index} className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+              <div className="text-4xl mb-4">{service.icon}</div>
+              <h3 className="text-xl font-semibold text-slate-900 mb-3">{service.title}</h3>
+              <p className="text-slate-600 leading-relaxed">{service.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact & Consultation Section */}
+      <section id="contact" className="py-20 px-8 bg-white border-t border-slate-200">
+        <div className="max-w-xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-slate-900 mb-3">Schedule a Consultation</h2>
+            <p className="text-slate-600">Get expert advice on your tax filings, corporate secretarial work, or legal needs.</p>
+          </div>
+
+          <form className="space-y-6 bg-slate-50 p-8 rounded-2xl border border-slate-200 shadow-sm">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Full Name / Company Name</label>
+              <input 
+                type="text" 
+                placeholder="Enter your name" 
+                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
+              <input 
+                type="email" 
+                placeholder="you@example.com" 
+                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Service Required</label>
+              <select className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white">
+                <option>Taxation & GST Compliance</option>
+                <option>Company Secretarial / ROC Filing</option>
+                <option>Legal Advisory & Contracts</option>
+                <option>Other Services</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Message / Details</label>
+              <textarea 
+                rows="4" 
+                placeholder="Briefly describe what assistance you need..." 
+                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+              ></textarea>
+            </div>
+
+            <button 
+              type="submit" 
+              className="w-full bg-blue-600 text-white font-medium py-3 rounded-lg shadow hover:bg-blue-700 transition"
+            >
+              Submit Inquiry
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
+        <p>© {new Date().getFullYear()} YourFirmName Advisors. All rights reserved. Professional Confidentiality Guaranteed.</p>
+      </footer>
+    </main>
   );
 }
