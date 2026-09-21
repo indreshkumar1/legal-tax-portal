@@ -105,7 +105,7 @@ export default function Home() {
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">Message / Details</label>
               <textarea 
-                rows="4" 
+                rows={4} 
                 placeholder="Briefly describe what assistance you need..." 
                 className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
               ></textarea>
