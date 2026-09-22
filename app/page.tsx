@@ -1,4 +1,4 @@
-'client'; // Ensures client-side state and audio functionality work seamlessly in Next.js
+'use client'; // Ensures client-side state and audio functionality work seamlessly in Next.js
 import { useState } from 'react';
 
 export default function Home() {
