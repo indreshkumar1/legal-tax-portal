@@ -171,8 +171,9 @@ export default function Home() {
         <div className="font-bold text-xl text-slate-900">
           YourFirmName <span className="text-blue-600">Advisors</span>
         </div>
-        <div className="space-x-6 text-sm font-medium text-slate-600 hidden md:flex">
+        <div className="space-x-6 text-sm font-medium text-slate-600 hidden md:flex items-center">
           <a href="#services" className="hover:text-blue-600">Services</a>
+          <a href="/about" className="hover:text-blue-600">About Us</a>
           <a href="#contact" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Book Consultation</a>
         </div>
       </nav>
@@ -255,8 +256,7 @@ export default function Home() {
             method="POST" 
             className="space-y-6 bg-slate-50 p-8 rounded-2xl border border-slate-200 shadow-sm"
           >
-            {/* REPLACE THE TEXT BELOW WITH YOUR ACTUAL WEB3FORMS ACCESS KEY */}
-            <input type="hidden" name="apikey" value="b5d8ed86-5013-4854-9fe4-29efbc0e7343" />
+            <input type="hidden" name="apikey" value="51e34f82-a396-4171-893f-67f7d1cc32b4" />
 
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">Full Name / Company Name</label>
