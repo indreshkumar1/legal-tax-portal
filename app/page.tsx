@@ -1,4 +1,11 @@
 export default function Home() {
+  const firmName = "Triwisepartners"; // Change this to your exact firm name if different
+  
+  // COMPANY CONTACT INFORMATION
+  const companyPhone = "+91 (987) 654-3210";
+  const companyEmail = "legal@triwisepartners.com";
+  const companyAddress = "Gurgaon";
+
   const coreServices = [
     {
       number: "01",
@@ -184,15 +191,17 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-800">
-      {/* Top Utility Bar with Official Contact Information */}
+      {/* Top Utility Bar with Phone & Official Email */}
       <div className="bg-slate-900 text-slate-300 text-xs py-2 px-8 flex flex-col sm:flex-row justify-between items-center border-b border-slate-800">
-        <div className="flex items-center gap-4 mb-1 sm:mb-0">
-          <span>📧 Official Mail: <a href="mailto:legal@triwisepartners.com" className="text-blue-400 hover:underline">legal@triwisepartners.com</a></span>
+        <div className="flex flex-wrap items-center gap-4 mb-1 sm:mb-0">
+          <span>📞 Call: <a href={`tel:${companyPhone}`} className="text-blue-400 hover:underline">{companyPhone}</a></span>
+          <span>|</span>
+          <span>📧 Mail: <a href={`mailto:${companyEmail}`} className="text-blue-400 hover:underline">{companyEmail}</a></span>
           <span className="hidden md:inline">|</span>
-          <span className="hidden md:inline">🔒 Strict Client Confidentiality & Data Privacy Guaranteed</span>
+          <span className="hidden md:inline">🔒 Confidentiality Guaranteed</span>
         </div>
         <div className="text-slate-400">
-          Working Hours: Mon - Fri (9:00 AM - 7:00 PM IST)
+          Mon - Fri (9:00 AM - 7:00 PM IST)
         </div>
       </div>
 
@@ -200,7 +209,7 @@ export default function Home() {
       <nav className="bg-white border-b border-slate-200 py-4 px-8 flex justify-between items-center shadow-sm sticky top-0 z-50">
         <div className="font-bold text-xl text-slate-900 flex items-center gap-2">
           <span className="bg-blue-600 text-white p-1.5 rounded-lg text-sm">⚖️</span>
-          YourFirmName <span className="text-blue-600">Advisors</span>
+          {firmName} <span className="text-blue-600">Advisors</span>
         </div>
         <div className="space-x-6 text-sm font-medium text-slate-600 hidden md:flex items-center">
           <a href="#services" className="hover:text-blue-600">Services</a>
@@ -211,51 +220,75 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Enhanced Hero Section with Key Trust Points */}
-      <section className="py-24 px-8 text-center bg-gradient-to-b from-white via-slate-50 to-slate-100 border-b border-slate-200 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto relative z-10">
-          <span className="bg-blue-50 text-blue-700 font-semibold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full border border-blue-100 inline-block mb-6">
-            Legal • Secretarial • Taxation • SEBI & FEMA Compliance
-          </span>
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
-            Strategic Counsel & Uncompromising Regulatory Compliance
-          </h1>
-          <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Empowering businesses, corporate boards, and investors with precision-driven legal frameworks, meticulous governance, and expert tax advisory.
-          </p>
+      {/* Hero Section with Visual Image */}
+      <section className="py-20 px-8 bg-gradient-to-b from-white via-slate-50 to-slate-100 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          
+          {/* Left Column: Text & CTAs */}
+          <div className="text-left">
+            <span className="bg-blue-50 text-blue-700 font-semibold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full border border-blue-100 inline-block mb-6">
+              Legal • Secretarial • Taxation • SEBI & FEMA Compliance
+            </span>
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
+              Strategic Counsel & Uncompromising Regulatory Compliance
+            </h1>
+            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+              Empowering businesses, corporate boards, and investors with precision-driven legal frameworks, meticulous governance, and expert tax advisory under {firmName}.
+            </p>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-14">
-            <a 
-              href="#contact" 
-              className="bg-blue-600 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:bg-blue-700 transition"
-            >
-              Schedule a Consultation
-            </a>
-            <a 
-              href="#services" 
-              className="bg-white text-slate-700 font-semibold px-8 py-4 rounded-xl border border-slate-300 shadow-sm hover:bg-slate-50 transition"
-            >
-              Explore 17+ Practice Areas ↓
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 mb-10">
+              <a 
+                href="#contact" 
+                className="bg-blue-600 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:bg-blue-700 text-center transition"
+              >
+                Schedule a Consultation
+              </a>
+              <a 
+                href="#services" 
+                className="bg-white text-slate-700 font-semibold px-8 py-4 rounded-xl border border-slate-300 shadow-sm hover:bg-slate-50 text-center transition"
+              >
+                Explore 17+ Practice Areas ↓
+              </a>
+            </div>
           </div>
 
-          {/* Key Trust Points Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10 border-t border-slate-200 text-left">
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-              <div className="text-blue-600 font-bold text-xl mb-1">17+ Pillars</div>
-              <div className="text-slate-900 font-semibold text-sm">Comprehensive Expertise</div>
-              <p className="text-slate-500 text-xs mt-1">From company incorporation to NCLT petitions and SEBI LODR compliance.</p>
+          {/* Right Column: Professional Legal Image Card */}
+          <div className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl blur-lg opacity-25"></div>
+            <div className="relative bg-white p-4 rounded-3xl border border-slate-200 shadow-xl overflow-hidden group">
+              <div className="relative h-72 md:h-80 rounded-2xl overflow-hidden bg-slate-900">
+                <img 
+                  src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000&auto=format&fit=crop" 
+                  alt="Legal and Corporate Advisory Workspace" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex flex-col justify-end p-6 text-white">
+                  <span className="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1">Premier Corporate Practice</span>
+                  <h3 className="text-xl font-bold">Uncompromising Ethics & Precision</h3>
+                  <p className="text-slate-300 text-xs mt-1">Safeguarding corporate governance across NCLT, ROC, SEBI, and Tax frameworks.</p>
+                </div>
+              </div>
             </div>
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-              <div className="text-blue-600 font-bold text-xl mb-1">100% Secure</div>
-              <p className="text-slate-500 text-xs mt-1">Strict adherence to professional confidentiality and data handling standards.</p>
-              <div className="text-slate-900 font-semibold text-sm">Encrypted Inquiries</div>
-            </div>
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-              <div className="text-blue-600 font-bold text-xl mb-1">Regulatory Sync</div>
-              <div className="text-slate-900 font-semibold text-sm">Proactive Advisory</div>
-              <p className="text-slate-500 text-xs mt-1">Staying ahead of legislative shifts across MCA, RBI, SEBI, and Tax authorities.</p>
-            </div>
+          </div>
+
+        </div>
+
+        {/* Key Trust Points Grid */}
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 pt-16 mt-16 border-t border-slate-200 text-left">
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div className="text-blue-600 font-bold text-xl mb-1">17+ Pillars</div>
+            <div className="text-slate-900 font-semibold text-sm">Comprehensive Expertise</div>
+            <p className="text-slate-500 text-xs mt-1">From company incorporation to NCLT petitions and SEBI LODR compliance.</p>
+          </div>
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div className="text-blue-600 font-bold text-xl mb-1">100% Secure</div>
+            <div className="text-slate-900 font-semibold text-sm">Encrypted Inquiries</div>
+            <p className="text-slate-500 text-xs mt-1">Strict adherence to professional confidentiality and data handling standards.</p>
+          </div>
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div className="text-blue-600 font-bold text-xl mb-1">Regulatory Sync</div>
+            <div className="text-slate-900 font-semibold text-sm">Proactive Advisory</div>
+            <p className="text-slate-500 text-xs mt-1">Staying ahead of legislative shifts across MCA, RBI, SEBI, and Tax authorities.</p>
           </div>
         </div>
       </section>
@@ -264,7 +297,7 @@ export default function Home() {
       <section id="journey" className="py-20 px-8 max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-blue-600 font-semibold text-sm uppercase tracking-wider">Our Heritage</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">The Journey of Our Organization</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">The Journey of {firmName}</h2>
           <p className="text-slate-600 max-w-xl mx-auto">Built on a foundation of professional rigor, ethical practice, and deep regulatory insight.</p>
         </div>
 
@@ -286,7 +319,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section with Hover Animation */}
+      {/* Services Section */}
       <section id="services" className="py-20 px-8 max-w-7xl mx-auto bg-slate-100/50 rounded-3xl my-10 border border-slate-200">
         <div className="text-center mb-16">
           <span className="text-blue-600 font-semibold text-sm uppercase tracking-wider">Core Offerings</span>
@@ -306,12 +339,10 @@ export default function Home() {
                   <span className="text-2xl">{service.icon}</span>
                 </div>
                 
-                {/* Headline */}
                 <h3 className="text-lg font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">
                   {service.title}
                 </h3>
 
-                {/* Hidden content that slides open smoothly on mouse hover */}
                 <div className="max-h-0 overflow-hidden opacity-0 group-hover:max-h-[600px] group-hover:opacity-100 transition-all duration-500 ease-in-out">
                   <ul className="space-y-2 mt-4 pt-4 border-t border-slate-100">
                     {service.details.map((detail, idx) => (
@@ -324,7 +355,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Hover prompt footer */}
               <div className="mt-4 pt-3 border-t border-slate-50 flex items-center justify-between text-xs font-medium text-slate-400 group-hover:text-blue-600 transition-colors">
                 <span>Hover for details</span>
                 <span className="transform group-hover:translate-y-0.5 transition-transform">↓</span>
@@ -334,80 +364,103 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact & Consultation Section */}
+      {/* Contact & Consultation Section with Company Address & Phone Details */}
       <section id="contact" className="py-20 px-8 bg-white border-t border-slate-200">
-        <div className="max-w-xl mx-auto">
-          <div className="text-center mb-10">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-slate-900 mb-3">Schedule a Confidential Consultation</h2>
-            <p className="text-slate-600">Get expert advice on your corporate, taxation, secretarial, or legal needs.</p>
+            <p className="text-slate-600">Connect with our advisors via phone, visit our office, or submit an inquiry below.</p>
           </div>
 
-          <form 
-            action="https://api.web3forms.com/submit" 
-            method="POST" 
-            className="space-y-6 bg-slate-50 p-8 rounded-2xl border border-slate-200 shadow-sm"
-          >
-            {/* REPLACE WITH YOUR ACTUAL WEB3FORMS KEY */}
-            <input type="hidden" name="apikey" value="b5d8ed86-5013-4854-9fe4-29efbc0e7343" />
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Full Name / Company Name</label>
-              <input 
-                type="text" 
-                name="name"
-                placeholder="Enter your name" 
-                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
-                required
-              />
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
+            {/* Address Box */}
+            <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center">
+              <div className="text-2xl mb-2">📍</div>
+              <h4 className="font-semibold text-slate-900 text-sm mb-1">Office Address</h4>
+              <p className="text-slate-600 text-xs leading-relaxed">{companyAddress}</p>
             </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
-              <input 
-                type="email" 
-                name="email"
-                placeholder="you@example.com" 
-                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
-                required
-              />
+            {/* Phone Box */}
+            <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center">
+              <div className="text-2xl mb-2">📞</div>
+              <h4 className="font-semibold text-slate-900 text-sm mb-1">Direct Line</h4>
+              <p className="text-slate-600 text-xs"><a href={`tel:${companyPhone}`} className="text-blue-600 hover:underline">{companyPhone}</a></p>
             </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Service Required</label>
-              <select 
-                name="service"
-                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
-              >
-                {coreServices.map((s, idx) => (
-                  <option key={idx} value={`${s.number} - ${s.title}`}>{s.number} - {s.title}</option>
-                ))}
-              </select>
+            {/* Email Box */}
+            <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-center">
+              <div className="text-2xl mb-2">✉️</div>
+              <h4 className="font-semibold text-slate-900 text-sm mb-1">Official Email</h4>
+              <p className="text-slate-600 text-xs"><a href={`mailto:${companyEmail}`} className="text-blue-600 hover:underline">{companyEmail}</a></p>
             </div>
+          </div>
 
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Message / Details</label>
-              <textarea 
-                name="message"
-                rows={4} 
-                placeholder="Briefly describe what assistance you need..." 
-                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
-              ></textarea>
-            </div>
-
-            <button 
-              type="submit" 
-              className="w-full bg-blue-600 text-white font-medium py-3 rounded-lg shadow hover:bg-blue-700 transition"
+          <div className="max-w-xl mx-auto">
+            <form 
+              action="https://api.web3forms.com/submit" 
+              method="POST" 
+              className="space-y-6 bg-slate-50 p-8 rounded-2xl border border-slate-200 shadow-sm"
             >
-              Submit Confidential Inquiry
-            </button>
-          </form>
+              <input type="hidden" name="apikey" value="51e34f82-a396-4171-893f-67f7d1cc32b4" />
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Full Name / Company Name</label>
+                <input 
+                  type="text" 
+                  name="name"
+                  placeholder="Enter your name" 
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
+                <input 
+                  type="email" 
+                  name="email"
+                  placeholder="you@example.com" 
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Service Required</label>
+                <select 
+                  name="service"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+                >
+                  {coreServices.map((s, idx) => (
+                    <option key={idx} value={`${s.number} - ${s.title}`}>{s.number} - {s.title}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Message / Details</label>
+                <textarea 
+                  name="message"
+                  rows={4} 
+                  placeholder="Briefly describe what assistance you need..." 
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
+                ></textarea>
+              </div>
+
+              <button 
+                type="submit" 
+                className="w-full bg-blue-600 text-white font-medium py-3 rounded-lg shadow hover:bg-blue-700 transition"
+              >
+                Submit Confidential Inquiry
+              </button>
+            </form>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-400 py-10 px-8 text-center text-sm border-t border-slate-800">
         <div className="max-w-4xl mx-auto space-y-3">
-          <p className="font-semibold text-slate-300">YourFirmName Advisors — Legal, Secretarial, & Taxation Practice</p>
+          <p className="font-semibold text-slate-300">{firmName} Advisors — Legal, Secretarial, & Taxation Practice</p>
+          <p className="text-xs">{companyAddress} | Phone: {companyPhone}</p>
           <p>© {new Date().getFullYear()} All rights reserved. Professional Confidentiality & Ethics Guaranteed.</p>
         </div>
       </footer>
