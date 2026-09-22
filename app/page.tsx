@@ -1,14 +1,47 @@
+'client'; // Ensures client-side state and audio functionality work seamlessly in Next.js
+import { useState } from 'react';
+
 export default function Home() {
-  // CONFIGURABLE FIRM DETAILS (Change these to your exact official details)
-  const firmName = "LexCorp"; 
+  const firmName = "triwisepartners"; 
   const companyPhone = "+91 (987) 654-3210";
   const companyEmail = "contact@lexcorp.com";
-  const companyAddress = "Gurgaon";
+  const companyAddress = "Gurgaon, Hryana";
+
+  // State for active category filter and selected service modal
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [selectedService, setSelectedService] = useState<any | null>(null);
+
+  // High-end subtle UI click sound using Web Audio API
+  const playClickSound = () => {
+    try {
+      const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioContext) return;
+      const ctx = new AudioContext();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.05);
+      
+      gain.gain.setValueAtTime(0.05, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+      
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      
+      osc.start();
+      osc.stop(ctx.currentTime + 0.05);
+    } catch (e) {
+      // Ignore if audio context is blocked by browser policy prior to interaction
+    }
+  };
 
   const coreServices = [
     {
       number: "01",
       title: "Business Structuring & Registration",
+      category: "Law & Legal",
       subtitle: "Corporate Foundation & Entity Setup",
       details: [
         "Incorporation of Companies, LLPs, Partnerships, Trusts, and Societies in India",
@@ -19,6 +52,7 @@ export default function Home() {
     {
       number: "02",
       title: "Corporate Secretarial & Legal Support",
+      category: "Law & Legal",
       subtitle: "Governance, Board Advisory & Compliance",
       details: [
         "Support for M&A, buybacks, and restructuring events",
@@ -37,6 +71,7 @@ export default function Home() {
     {
       number: "03",
       title: "Corporate Restructuring",
+      category: "Law & Legal",
       subtitle: "Mergers, Demergers & Amalgamations",
       details: [
         "Structuring and execution of mergers, demergers, and amalgamations under Sections 230–232 of the Companies Act, 2013",
@@ -47,6 +82,7 @@ export default function Home() {
     {
       number: "04",
       title: "Oppression & Mismanagement (O&M)",
+      category: "Law & Legal",
       subtitle: "Dispute Resolution & NCLT Representation",
       details: [
         "Representation in petitions under Sections 241–242 of the Companies Act, 2013 for relief against oppression and mismanagement before the NCLT",
@@ -57,6 +93,7 @@ export default function Home() {
     {
       number: "05",
       title: "Tax Advisory & Compliance",
+      category: "Taxation",
       subtitle: "Direct & Indirect Tax Architecture",
       details: [
         "Income Tax and GST advisory, planning, and filings",
@@ -67,6 +104,7 @@ export default function Home() {
     {
       number: "06",
       title: "Labour & Employment Law Compliance",
+      category: "Law & Legal",
       subtitle: "Workforce Regulations & HR Audits",
       details: [
         "PF, ESI, Shops & Establishment Act compliance",
@@ -77,6 +115,7 @@ export default function Home() {
     {
       number: "07",
       title: "Intellectual Property Rights (IPR)",
+      category: "Law & Legal",
       subtitle: "Trademarks, Copyrights & Patents",
       details: [
         "Filing and protection of trademarks, copyrights, patents, and designs",
@@ -87,6 +126,7 @@ export default function Home() {
     {
       number: "08",
       title: "FEMA & RBI Advisory",
+      category: "Advisory",
       subtitle: "Cross-Border Remittances & FDI",
       details: [
         "FDI structuring, foreign remittance compliance, RBI filings",
@@ -97,6 +137,7 @@ export default function Home() {
     {
       number: "09",
       title: "SEBI (LODR) Regulations",
+      category: "SEBI & Capital Markets",
       subtitle: "Continuous Listing Compliance",
       details: [
         "Continuous compliance for listed entities: financial disclosures, corporate governance report, and regulatory filings with stock exchanges",
@@ -108,6 +149,7 @@ export default function Home() {
     {
       number: "10",
       title: "SEBI (ICDR) Regulations",
+      category: "SEBI & Capital Markets",
       subtitle: "Capital Issuances, IPOs & ESOPs",
       details: [
         "Advisory support for IPOs, rights issues, preferential allotments, and QIPs",
@@ -118,6 +160,7 @@ export default function Home() {
     {
       number: "11",
       title: "SEBI (SAST) Regulations",
+      category: "SEBI & Capital Markets",
       subtitle: "Takeover Code & Open Offers",
       details: [
         "Advisory on open offers, creeping acquisition limits, and takeover code compliance",
@@ -128,6 +171,7 @@ export default function Home() {
     {
       number: "12",
       title: "SEBI (PIT) Regulations",
+      category: "SEBI & Capital Markets",
       subtitle: "Insider Trading & SDD Compliance",
       details: [
         "Code of Conduct implementation, trading window management, and Structured Digital Database (SDD) compliance",
@@ -138,6 +182,7 @@ export default function Home() {
     {
       number: "13",
       title: "Capital Market Services",
+      category: "SEBI & Capital Markets",
       subtitle: "Delisting & Investor Grievances",
       details: [
         "Delisting Regulations advisory and Depositories & Participants compliance",
@@ -148,6 +193,7 @@ export default function Home() {
     {
       number: "14",
       title: "Adjudication & Compounding",
+      category: "Law & Legal",
       subtitle: "Regulatory Offence Settlement",
       details: [
         "Representation in adjudication proceedings for procedural defaults under the Companies Act, FEMA, and SEBI regulations",
@@ -158,6 +204,7 @@ export default function Home() {
     {
       number: "15",
       title: "Liaisoning Services",
+      category: "Advisory",
       subtitle: "Regulatory Body Coordination",
       details: [
         "Liaisoning with ROC, RD, MCA, SEBI, Stock Exchanges, RBI and other regulatory bodies",
@@ -168,6 +215,7 @@ export default function Home() {
     {
       number: "16",
       title: "Due Diligence & Governance Audits",
+      category: "Advisory",
       subtitle: "Investor & Regulatory Health Checks",
       details: [
         "Legal due diligence and documentation audits",
@@ -178,6 +226,7 @@ export default function Home() {
     {
       number: "17",
       title: "Collaborative Solutions",
+      category: "Advisory",
       subtitle: "Multi-Disciplinary Professional Tie-ups",
       details: [
         "Strategic tie-ups with legal, tax, and financial professionals",
@@ -187,22 +236,16 @@ export default function Home() {
     }
   ];
 
+  const categories = ["All", "Law & Legal", "SEBI & Capital Markets", "Taxation", "Advisory"];
+
+  const filteredServices = activeCategory === "All" 
+    ? coreServices 
+    : coreServices.filter(s => s.category === activeCategory);
+
   const milestones = [
-    {
-      year: "Phase I",
-      title: "Foundation of Rigor",
-      desc: "Established with an uncompromising focus on meticulous corporate governance, company law compliance, and statutory precision."
-    },
-    {
-      year: "Phase II",
-      title: "Scaling Capital Markets",
-      desc: "Expanded specialized practice tiers to cover listed entity regulations, complex NCLT restructuring, and SEBI LODR frameworks."
-    },
-    {
-      year: "Present",
-      title: "Multi-Disciplinary Counsel",
-      desc: "Trusted institutional counsel representing diverse enterprises, corporations, and boards before regulatory appellate authorities."
-    }
+    { year: "Phase I", title: "Foundation of Rigor", desc: "Established with an uncompromising focus on meticulous corporate governance and company law compliance." },
+    { year: "Phase II", title: "Scaling Capital Markets", desc: "Expanded specialized practice tiers to cover listed entity regulations, NCLT restructuring, and SEBI frameworks." },
+    { year: "Present", title: "Multi-Disciplinary Counsel", desc: "Trusted institutional counsel representing diverse enterprises and boards before regulatory appellate authorities." }
   ];
 
   return (
@@ -239,21 +282,20 @@ export default function Home() {
         </div>
 
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-          <a href="#services" className="hover:text-blue-400 transition-colors">Practice Areas</a>
-          <a href="#journey" className="hover:text-blue-400 transition-colors">Our Heritage</a>
-          <a href="#credentials" className="hover:text-blue-400 transition-colors">Why Us</a>
-          <a href="#contact" className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-blue-600/20 hover:shadow-blue-600/40 hover:scale-[1.02] transition-all duration-200">
+          <a href="#services" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Practice Domains</a>
+          <a href="#journey" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Our Heritage</a>
+          <a href="#credentials" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Why Us</a>
+          <a href="#contact" onClick={playClickSound} className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-blue-600/20 hover:scale-[1.02] transition-all">
             Schedule Consultation
           </a>
         </div>
       </nav>
 
-      {/* Hero Section with Cinematic Depth */}
+      {/* Hero Section */}
       <section className="relative pt-20 pb-28 px-6 lg:px-16 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
         
         <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center relative z-10">
-          
           <div className="lg:col-span-7 text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold tracking-wider uppercase mb-6">
               <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
@@ -271,24 +313,24 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
                 href="#contact" 
-                className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-4 rounded-xl shadow-xl shadow-blue-600/30 text-center transition-all duration-200 hover:-translate-y-0.5"
+                onClick={playClickSound}
+                className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-4 rounded-xl shadow-xl shadow-blue-600/30 text-center transition-all"
               >
                 Request Confidential Consultation
               </a>
               <a 
                 href="#services" 
-                className="bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold px-8 py-4 rounded-xl border border-slate-700 text-center transition-all duration-200"
+                onClick={playClickSound}
+                className="bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold px-8 py-4 rounded-xl border border-slate-700 text-center transition-all"
               >
                 Explore 17+ Practice Pillars ↓
               </a>
             </div>
           </div>
 
-          {/* High-End Immersive Graphic / Visual Card */}
           <div className="lg:col-span-5">
             <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl blur-xl opacity-40 group-hover:opacity-75 transition duration-1000"></div>
-              
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl blur-xl opacity-40"></div>
               <div className="relative bg-slate-900/90 border border-slate-800 p-6 rounded-3xl shadow-2xl backdrop-blur-xl">
                 <div className="relative h-80 rounded-2xl overflow-hidden mb-6 bg-slate-950 border border-slate-800">
                   <img 
@@ -301,7 +343,6 @@ export default function Home() {
                     <h3 className="text-xl font-bold text-white">Excellence in Statutory Frameworks</h3>
                   </div>
                 </div>
-
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
                     <div className="text-blue-400 text-2xl font-black mb-1">17+</div>
@@ -315,25 +356,134 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-        </div>
-
-        {/* Floating Trust Metrics Bar */}
-        <div id="credentials" className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 pt-16 border-t border-slate-800/80">
-          <div className="bg-slate-900/60 border border-slate-800 p-6 rounded-2xl backdrop-blur-sm">
-            <div className="text-blue-400 font-bold text-xl mb-1">Deep Regulatory Sync</div>
-            <p className="text-slate-400 text-xs leading-relaxed">Continuous monitoring and proactive alignment across MCA, SEBI, RBI, and Tax appellate bodies.</p>
-          </div>
-          <div className="bg-slate-900/60 border border-slate-800 p-6 rounded-2xl backdrop-blur-sm">
-            <div className="text-blue-400 font-bold text-xl mb-1">Rigorous Documentation</div>
-            <p className="text-slate-400 text-xs leading-relaxed">Drafting and vetting of shareholder agreements, board minutes, and complex restructuring petitions.</p>
-          </div>
-          <div className="bg-slate-900/60 border border-slate-800 p-6 rounded-2xl backdrop-blur-sm">
-            <div className="text-blue-400 font-bold text-xl mb-1">Strategic Advisory</div>
-            <p className="text-slate-400 text-xs leading-relaxed">Tailored legal strategies engineered to mitigate risk, protect minority interests, and accelerate growth.</p>
-          </div>
         </div>
       </section>
+
+      {/* Interactive Navigation Filterable Services Section */}
+      <section id="services" className="py-24 px-6 lg:px-16 max-w-7xl mx-auto bg-slate-900/40 rounded-3xl border border-slate-800/80 my-10">
+        <div className="text-center mb-12">
+          <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Practice Domains</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">Explore Our 17 Practice Pillars</h2>
+          <p className="text-slate-400 max-w-2xl mx-auto text-sm mb-8">Click any category tab to filter domains, or click any service card to open its interactive regulatory scope.</p>
+
+          {/* Interactive Navigation Filtering Bar */}
+          <div className="flex flex-wrap justify-center gap-3">
+            {categories.map((cat, idx) => (
+              <button
+                key={idx}
+                onClick={() => {
+                  playClickSound();
+                  setActiveCategory(cat);
+                }}
+                className={`px-5 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all ${
+                  activeCategory === cat 
+                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 border border-blue-400/40' 
+                    : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 hover:text-white'
+                }`}
+              >
+                {cat} {cat === 'All' ? `(${coreServices.length})` : `(${coreServices.filter(s => s.category === cat).length})`}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Services Grid with Click Feedback */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredServices.map((service, index) => (
+            <div 
+              key={index} 
+              onClick={() => {
+                playClickSound();
+                setSelectedService(service);
+              }}
+              className="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-blue-500/50 hover:bg-slate-900/80 transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-xl relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-bl-full pointer-events-none group-hover:bg-blue-500/10 transition-colors"></div>
+              <div>
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-xl font-black text-blue-400">{service.number}</span>
+                  <span className="text-2xl p-2 bg-slate-950 rounded-xl border border-slate-800">{service.icon}</span>
+                </div>
+                
+                <span className="inline-block text-[10px] font-bold text-blue-400 bg-blue-500/10 px-2.5 py-0.5 rounded-md mb-2 border border-blue-500/20">
+                  {service.category}
+                </span>
+
+                <h3 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors mb-1">
+                  {service.title}
+                </h3>
+                <p className="text-xs text-slate-400 font-medium mb-4">{service.subtitle}</p>
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-slate-800/60 flex items-center justify-between text-xs font-semibold text-slate-400 group-hover:text-blue-400 transition-colors">
+                <span>Click to view full scope →</span>
+                <span className="bg-blue-600/20 text-blue-400 p-1.5 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-all">+</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Interactive Service Detail Modal Popup */}
+      {selectedService && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
+          <div className="bg-slate-900 border border-slate-700 max-w-2xl w-full p-8 rounded-3xl shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button 
+              onClick={() => {
+                playClickSound();
+                setSelectedService(null);
+              }}
+              className="absolute top-6 right-6 text-slate-400 hover:text-white bg-slate-800 w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg border border-slate-700"
+            >
+              ✕
+            </button>
+            
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-3xl p-3 bg-slate-950 rounded-2xl border border-slate-800">{selectedService.icon}</span>
+              <div>
+                <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">{selectedService.category} • Pillar {selectedService.number}</span>
+                <h3 className="text-2xl font-black text-white">{selectedService.title}</h3>
+              </div>
+            </div>
+
+            <p className="text-sm text-slate-300 font-medium mb-6 pb-4 border-b border-slate-800">
+              {selectedService.subtitle}
+            </p>
+
+            <h4 className="text-xs font-bold uppercase tracking-wider text-blue-400 mb-3">Comprehensive Compliance & Advisory Scope:</h4>
+            <ul className="space-y-3 mb-8">
+              {selectedService.details.map((detail: string, idx: number) => (
+                <li key={idx} className="text-slate-300 text-xs sm:text-sm flex items-start bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+                  <span className="text-blue-400 mr-3 font-bold mt-0.5">▪</span>
+                  <span className="leading-relaxed">{detail}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex gap-4">
+              <a 
+                href="#contact" 
+                onClick={() => {
+                  playClickSound();
+                  setSelectedService(null);
+                }}
+                className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 rounded-xl text-center text-sm shadow-lg shadow-blue-600/30 transition-all"
+              >
+                Inquire About This Service
+              </a>
+              <button 
+                onClick={() => {
+                  playClickSound();
+                  setSelectedService(null);
+                }}
+                className="px-6 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold py-3.5 rounded-xl text-sm transition-all border border-slate-700"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Organization Heritage / Journey */}
       <section id="journey" className="py-24 px-6 lg:px-16 max-w-6xl mx-auto">
@@ -351,55 +501,6 @@ export default function Home() {
               </span>
               <h3 className="text-xl font-bold text-white mt-6 mb-3">{item.title}</h3>
               <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
-              <div className="mt-8 pt-4 border-t border-slate-800 text-xs font-semibold text-slate-500 group-hover:text-blue-400 transition-colors">
-                Milestone 0{index + 1}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Services Grid Section with Expandable Hover Effect */}
-      <section id="services" className="py-24 px-6 lg:px-16 max-w-7xl mx-auto bg-slate-900/40 rounded-3xl border border-slate-800/80 my-10">
-        <div className="text-center mb-16">
-          <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Practice Domains</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">Comprehensive Practice Areas</h2>
-          <p className="text-slate-400 max-w-2xl mx-auto text-sm">Hover over any practice pillar to view full regulatory scope and specialized compliance capabilities.</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {coreServices.map((service, index) => (
-            <div 
-              key={index} 
-              className="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-blue-500/50 hover:bg-slate-900/80 transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-xl"
-            >
-              <div>
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-xl font-black text-blue-400">{service.number}</span>
-                  <span className="text-2xl p-2 bg-slate-950 rounded-xl border border-slate-800">{service.icon}</span>
-                </div>
-                
-                <h3 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors mb-1">
-                  {service.title}
-                </h3>
-                <p className="text-xs text-slate-400 font-medium mb-4">{service.subtitle}</p>
-
-                <div className="max-h-0 overflow-hidden opacity-0 group-hover:max-h-[800px] group-hover:opacity-100 transition-all duration-500 ease-in-out">
-                  <ul className="space-y-2 pt-4 border-t border-slate-800">
-                    {service.details.map((detail, idx) => (
-                      <li key={idx} className="text-slate-300 text-xs flex items-start leading-relaxed">
-                        <span className="text-blue-400 mr-2 font-bold">▪</span>
-                        <span>{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <div className="mt-6 pt-3 border-t border-slate-800/60 flex items-center justify-between text-xs font-semibold text-slate-500 group-hover:text-blue-400 transition-colors">
-                <span>View Scope</span>
-                <span className="transform group-hover:translate-y-0.5 transition-transform">↓</span>
-              </div>
             </div>
           ))}
         </div>
@@ -413,7 +514,6 @@ export default function Home() {
           <p className="text-slate-400 text-sm">Connect directly via office, phone, or submit your requirement securely below.</p>
         </div>
 
-        {/* Contact Information Cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-12">
           <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
             <div className="text-2xl mb-2">📍</div>
@@ -423,12 +523,12 @@ export default function Home() {
           <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
             <div className="text-2xl mb-2">📞</div>
             <h4 className="font-bold text-white text-sm mb-1">Direct Line</h4>
-            <p className="text-slate-400 text-xs"><a href={`tel:${companyPhone}`} className="text-blue-400 hover:underline">{companyPhone}</a></p>
+            <p className="text-slate-400 text-xs"><a href={`tel:${companyPhone}`} onClick={playClickSound} className="text-blue-400 hover:underline">{companyPhone}</a></p>
           </div>
           <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
             <div className="text-2xl mb-2">✉️</div>
             <h4 className="font-bold text-white text-sm mb-1">Official Email</h4>
-            <p className="text-slate-400 text-xs"><a href={`mailto:${companyEmail}`} className="text-blue-400 hover:underline">{companyEmail}</a></p>
+            <p className="text-slate-400 text-xs"><a href={`mailto:${companyEmail}`} onClick={playClickSound} className="text-blue-400 hover:underline">{companyEmail}</a></p>
           </div>
         </div>
 
@@ -488,7 +588,8 @@ export default function Home() {
 
             <button 
               type="submit" 
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-4 rounded-xl shadow-xl shadow-blue-600/30 transition-all duration-200"
+              onClick={playClickSound}
+              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-4 rounded-xl shadow-xl shadow-blue-600/35 transition-all"
             >
               Submit Confidential Inquiry Securely
             </button>
