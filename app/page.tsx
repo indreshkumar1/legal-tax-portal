@@ -4,7 +4,7 @@ import { useState } from 'react';
 export default function Home() {
   const firmName = "Triwisepartners"; 
   const companyPhone = "+91 (987) 654-3210";
-  const companyEmail = "contact@lexcorp.com";
+  const companyEmail = "contact@triwisepartners.com";
   const companyAddress = "Gurgaon";
 
   const [activeCategory, setActiveCategory] = useState("All");
@@ -268,7 +268,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Sticky Glassmorphism Navbar with Fully Working Links */}
+      {/* Sticky Glassmorphism Navbar with Home, About Us, and Services Links */}
       <nav className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 py-4 px-6 lg:px-16 flex justify-between items-center transition-all">
         <a href="#home" onClick={playClickSound} className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-900/30 text-white font-black text-lg border border-blue-400/30">
@@ -280,9 +280,10 @@ export default function Home() {
           </div>
         </a>
 
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <div className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
           <a href="#home" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Home</a>
-          <a href="#services" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Practice Domains</a>
+          <a href="#about" onClick={playClickSound} className="hover:text-blue-400 transition-colors">About Us</a>
+          <a href="#services" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Services</a>
           <a href="#journey" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Our Heritage</a>
           <a href="#credentials" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Why Us</a>
           <a href="#contact" onClick={playClickSound} className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-blue-600/20 hover:scale-[1.02] transition-all">
@@ -291,7 +292,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section with ID for Home Navigation */}
+      {/* Hero Section (Home) */}
       <section id="home" className="relative pt-20 pb-28 px-6 lg:px-16 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
         
@@ -359,10 +360,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Interactive Navigation Filterable Services Section */}
+      {/* About Us Section */}
+      <section id="about" className="py-24 px-6 lg:px-16 max-w-6xl mx-auto scroll-mt-24 border-t border-slate-800/80">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">About Us</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-4 mb-6">Pioneering Excellence in Corporate Counsel</h2>
+            <p className="text-slate-300 text-sm leading-relaxed mb-4">
+              {firmName} is a premier multi-disciplinary legal, secretarial, and taxation advisory firm dedicated to guiding enterprises through complex regulatory landscapes. Our practice combines meticulous statutory compliance with aggressive, strategic advocacy.
+            </p>
+            <p className="text-slate-400 text-sm leading-relaxed mb-6">
+              Whether navigating NCLT proceedings, SEBI listing requirements, cross-border FEMA structures, or routine board governance, our seasoned professionals deliver precision-driven solutions tailored to institutional and high-growth objectives.
+            </p>
+            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-800">
+              <div>
+                <h4 className="text-white font-bold text-base mb-1">Ethical Integrity</h4>
+                <p className="text-slate-400 text-xs">Uncompromising adherence to professional standards and complete discretion.</p>
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-base mb-1">Regulatory Sync</h4>
+                <p className="text-slate-400 text-xs">Real-time alignment with shifting statutory frameworks across MCA, RBI, and Tax authorities.</p>
+              </div>
+            </div>
+          </div>
+          <div className="bg-slate-900 border border-slate-800 p-8 rounded-3xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-2xl"></div>
+            <h3 className="text-xl font-bold text-white mb-4">Core Philosophy</h3>
+            <p className="text-slate-300 text-sm leading-relaxed mb-6">
+              "We believe that robust corporate governance is not merely a compliance burden, but a formidable strategic asset that shields enterprises and unlocks long-term valuation."
+            </p>
+            <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+              <span>Practice Leadership</span>
+              <span className="text-blue-400 font-semibold">{firmName} Advisors</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
       <section id="services" className="py-24 px-6 lg:px-16 max-w-7xl mx-auto bg-slate-900/40 rounded-3xl border border-slate-800/80 my-10 scroll-mt-24">
         <div className="text-center mb-12">
-          <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Practice Domains</span>
+          <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Services</span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">Explore Our 17 Practice Pillars</h2>
           <p className="text-slate-400 max-w-2xl mx-auto text-sm mb-8">Click any category navigation button below to filter specific legal & financial domains instantly.</p>
 
@@ -485,7 +523,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* Organization Heritage / Journey with ID for Navigation */}
+      {/* Organization Heritage / Journey */}
       <section id="journey" className="py-24 px-6 lg:px-16 max-w-6xl mx-auto scroll-mt-24">
         <div className="text-center mb-16">
           <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Our Heritage</span>
@@ -506,7 +544,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Us / Credentials Section with ID for Navigation */}
+      {/* Why Us / Credentials Section */}
       <section id="credentials" className="py-24 px-6 lg:px-16 max-w-6xl mx-auto scroll-mt-24">
         <div className="text-center mb-16">
           <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Why Choose Us</span>
