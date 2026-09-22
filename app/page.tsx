@@ -1,13 +1,12 @@
-'use client'; // Ensures client-side state and audio functionality work seamlessly in Next.js
+'use client'; 
 import { useState } from 'react';
 
 export default function Home() {
-  const firmName = "triwisepartners"; 
+  const firmName = "Triwisepartners"; 
   const companyPhone = "+91 (987) 654-3210";
   const companyEmail = "contact@lexcorp.com";
-  const companyAddress = "Gurgaon, Hryana";
+  const companyAddress = "Gurgaon";
 
-  // State for active category filter and selected service modal
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedService, setSelectedService] = useState<any | null>(null);
 
@@ -249,7 +248,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white font-sans">
+    <main className="min-h-screen bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white font-sans scroll-smooth">
       
       {/* Top Utility Announcement Bar */}
       <div className="bg-slate-900 border-b border-slate-800 text-slate-300 text-xs py-2.5 px-6 lg:px-16 flex flex-col sm:flex-row justify-between items-center gap-2">
@@ -269,9 +268,9 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Sticky Glassmorphism Navbar */}
+      {/* Sticky Glassmorphism Navbar with Fully Working Links */}
       <nav className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 py-4 px-6 lg:px-16 flex justify-between items-center transition-all">
-        <div className="flex items-center gap-3">
+        <a href="#home" onClick={playClickSound} className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-900/30 text-white font-black text-lg border border-blue-400/30">
             {firmName.charAt(0)}
           </div>
@@ -279,9 +278,10 @@ export default function Home() {
             <span className="font-extrabold text-xl tracking-tight text-white">{firmName}</span>
             <span className="text-blue-500 font-semibold text-xs block tracking-widest uppercase">Advisors & Counsel</span>
           </div>
-        </div>
+        </a>
 
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+          <a href="#home" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Home</a>
           <a href="#services" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Practice Domains</a>
           <a href="#journey" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Our Heritage</a>
           <a href="#credentials" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Why Us</a>
@@ -291,8 +291,8 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-28 px-6 lg:px-16 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      {/* Hero Section with ID for Home Navigation */}
+      <section id="home" className="relative pt-20 pb-28 px-6 lg:px-16 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
         
         <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center relative z-10">
@@ -360,11 +360,11 @@ export default function Home() {
       </section>
 
       {/* Interactive Navigation Filterable Services Section */}
-      <section id="services" className="py-24 px-6 lg:px-16 max-w-7xl mx-auto bg-slate-900/40 rounded-3xl border border-slate-800/80 my-10">
+      <section id="services" className="py-24 px-6 lg:px-16 max-w-7xl mx-auto bg-slate-900/40 rounded-3xl border border-slate-800/80 my-10 scroll-mt-24">
         <div className="text-center mb-12">
           <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Practice Domains</span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">Explore Our 17 Practice Pillars</h2>
-          <p className="text-slate-400 max-w-2xl mx-auto text-sm mb-8">Click any category tab to filter domains, or click any service card to open its interactive regulatory scope.</p>
+          <p className="text-slate-400 max-w-2xl mx-auto text-sm mb-8">Click any category navigation button below to filter specific legal & financial domains instantly.</p>
 
           {/* Interactive Navigation Filtering Bar */}
           <div className="flex flex-wrap justify-center gap-3">
@@ -485,8 +485,8 @@ export default function Home() {
         </div>
       )}
 
-      {/* Organization Heritage / Journey */}
-      <section id="journey" className="py-24 px-6 lg:px-16 max-w-6xl mx-auto">
+      {/* Organization Heritage / Journey with ID for Navigation */}
+      <section id="journey" className="py-24 px-6 lg:px-16 max-w-6xl mx-auto scroll-mt-24">
         <div className="text-center mb-16">
           <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Our Heritage</span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">The Evolution of {firmName}</h2>
@@ -506,8 +506,28 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Why Us / Credentials Section with ID for Navigation */}
+      <section id="credentials" className="py-24 px-6 lg:px-16 max-w-6xl mx-auto scroll-mt-24">
+        <div className="text-center mb-16">
+          <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Why Choose Us</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">Institutional Standards & Assurance</h2>
+          <p className="text-slate-400 max-w-xl mx-auto text-sm">Providing robust legal and fiscal defense backed by decades of collective advisory expertise.</p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-slate-900 border border-slate-800 p-8 rounded-3xl">
+            <h3 className="text-xl font-bold text-white mb-3">🛡️ Uncompromising Confidentiality</h3>
+            <p className="text-slate-400 text-sm leading-relaxed">We maintain rigorous data privacy protocols, safeguarding corporate restructuring details, board discussions, and sensitive financial records.</p>
+          </div>
+          <div className="bg-slate-900 border border-slate-800 p-8 rounded-3xl">
+            <h3 className="text-xl font-bold text-white mb-3">⚡ Proactive Regulatory Counsel</h3>
+            <p className="text-slate-400 text-sm leading-relaxed">Anticipating regulatory changes under SEBI, MCA, and Income Tax frameworks to protect your enterprise from compliance liabilities.</p>
+          </div>
+        </div>
+      </section>
+
       {/* Contact & Consultation Section */}
-      <section id="contact" className="py-24 px-6 lg:px-16 max-w-5xl mx-auto">
+      <section id="contact" className="py-24 px-6 lg:px-16 max-w-5xl mx-auto scroll-mt-24">
         <div className="text-center mb-12">
           <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Get In Touch</span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-3">Schedule a Confidential Consultation</h2>
