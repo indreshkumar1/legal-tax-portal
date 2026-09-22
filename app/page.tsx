@@ -171,11 +171,12 @@ export default function Home() {
         <div className="font-bold text-xl text-slate-900">
           YourFirmName <span className="text-blue-600">Advisors</span>
         </div>
-        <div className="space-x-6 text-sm font-medium text-slate-600 hidden md:flex items-center">
-          <a href="#services" className="hover:text-blue-600">Services</a>
-          <a href="/about" className="hover:text-blue-600">About Us</a>
-          <a href="#contact" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Book Consultation</a>
-        </div>
+        <div className="space-x-6 text-sm font-medium text-slate-600 flex items-center">
+  <a href="/" className="hover:text-blue-600">Home</a>
+  <a href="/about" className="text-blue-600 font-semibold">About Us</a>
+  <a href="/services" className="hover:text-blue-600">Services</a>
+  <a href="/#contact" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Book Consultation</a>
+      </div>
       </nav>
 
       {/* Hero Section */}
