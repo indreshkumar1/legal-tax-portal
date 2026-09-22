@@ -164,43 +164,133 @@ export default function Home() {
     }
   ];
 
+  const milestones = [
+    {
+      year: "Foundation",
+      title: "Establishment of Practice",
+      desc: "Founded with a vision to deliver meticulous corporate governance, company law compliance, and strategic taxation advisory."
+    },
+    {
+      year: "Expansion",
+      title: "Scaling Capital Markets & SEBI Advisory",
+      desc: "Expanded specialized practice tiers to cover listed entity regulations, LODR compliance, and complex corporate restructuring."
+    },
+    {
+      year: "Today",
+      title: "Trusted Multi-Disciplinary Counsel",
+      desc: "Representing diverse corporate entities, startups, and institutions across NCLT, ROC, RBI, and tax appellate authorities."
+    }
+  ];
+
   return (
     <main className="min-h-screen bg-slate-50 text-slate-800">
+      {/* Top Utility Bar with Official Contact Information */}
+      <div className="bg-slate-900 text-slate-300 text-xs py-2 px-8 flex flex-col sm:flex-row justify-between items-center border-b border-slate-800">
+        <div className="flex items-center gap-4 mb-1 sm:mb-0">
+          <span>📧 Official Mail: <a href="mailto:legal@triwisepartners.com" className="text-blue-400 hover:underline">legal@triwisepartners.com</a></span>
+          <span className="hidden md:inline">|</span>
+          <span className="hidden md:inline">🔒 Strict Client Confidentiality & Data Privacy Guaranteed</span>
+        </div>
+        <div className="text-slate-400">
+          Working Hours: Mon - Fri (9:00 AM - 7:00 PM IST)
+        </div>
+      </div>
+
       {/* Navigation Header */}
       <nav className="bg-white border-b border-slate-200 py-4 px-8 flex justify-between items-center shadow-sm sticky top-0 z-50">
-        <div className="font-bold text-xl text-slate-900">
+        <div className="font-bold text-xl text-slate-900 flex items-center gap-2">
+          <span className="bg-blue-600 text-white p-1.5 rounded-lg text-sm">⚖️</span>
           YourFirmName <span className="text-blue-600">Advisors</span>
         </div>
-        <div className="space-x-6 text-sm font-medium text-slate-600 flex items-center">
-  <a href="/" className="hover:text-blue-600">Home</a>
-  <a href="/about" className="text-blue-600 font-semibold">About Us</a>
-  <a href="/services" className="hover:text-blue-600">Services</a>
-  <a href="/#contact" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Book Consultation</a>
-      </div>
+        <div className="space-x-6 text-sm font-medium text-slate-600 hidden md:flex items-center">
+          <a href="#services" className="hover:text-blue-600">Services</a>
+          <a href="/services" className="hover:text-blue-600">Practice Domains</a>
+          <a href="/about" className="hover:text-blue-600">About Us</a>
+          <a href="#journey" className="hover:text-blue-600">Our Journey</a>
+          <a href="#contact" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Book Consultation</a>
+        </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="py-20 px-8 text-center bg-gradient-to-b from-white to-slate-100 border-b border-slate-200">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-6">
-            Reliable Legal, Secretarial, & Taxation Solutions
+      {/* Enhanced Hero Section with Key Trust Points */}
+      <section className="py-24 px-8 text-center bg-gradient-to-b from-white via-slate-50 to-slate-100 border-b border-slate-200 relative overflow-hidden">
+        <div className="max-w-4xl mx-auto relative z-10">
+          <span className="bg-blue-50 text-blue-700 font-semibold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full border border-blue-100 inline-block mb-6">
+            Legal • Secretarial • Taxation • SEBI & FEMA Compliance
+          </span>
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
+            Strategic Counsel & Uncompromising Regulatory Compliance
           </h1>
-          <p className="text-lg text-slate-600 mb-8">
-            Empowering your business with precise compliance, strategic tax planning, and trusted legal guidance.
+          <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Empowering businesses, corporate boards, and investors with precision-driven legal frameworks, meticulous governance, and expert tax advisory.
           </p>
-          <a 
-            href="#contact" 
-            className="bg-blue-600 text-white font-medium px-8 py-3 rounded-xl shadow-lg hover:bg-blue-700 transition"
-          >
-            Schedule a Consultation
-          </a>
+
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-14">
+            <a 
+              href="#contact" 
+              className="bg-blue-600 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:bg-blue-700 transition"
+            >
+              Schedule a Consultation
+            </a>
+            <a 
+              href="#services" 
+              className="bg-white text-slate-700 font-semibold px-8 py-4 rounded-xl border border-slate-300 shadow-sm hover:bg-slate-50 transition"
+            >
+              Explore 17+ Practice Areas ↓
+            </a>
+          </div>
+
+          {/* Key Trust Points Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10 border-t border-slate-200 text-left">
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+              <div className="text-blue-600 font-bold text-xl mb-1">17+ Pillars</div>
+              <div className="text-slate-900 font-semibold text-sm">Comprehensive Expertise</div>
+              <p className="text-slate-500 text-xs mt-1">From company incorporation to NCLT petitions and SEBI LODR compliance.</p>
+            </div>
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+              <div className="text-blue-600 font-bold text-xl mb-1">100% Secure</div>
+              <p className="text-slate-500 text-xs mt-1">Strict adherence to professional confidentiality and data handling standards.</p>
+              <div className="text-slate-900 font-semibold text-sm">Encrypted Inquiries</div>
+            </div>
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+              <div className="text-blue-600 font-bold text-xl mb-1">Regulatory Sync</div>
+              <div className="text-slate-900 font-semibold text-sm">Proactive Advisory</div>
+              <p className="text-slate-500 text-xs mt-1">Staying ahead of legislative shifts across MCA, RBI, SEBI, and Tax authorities.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Organization Journey / History Section */}
+      <section id="journey" className="py-20 px-8 max-w-5xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="text-blue-600 font-semibold text-sm uppercase tracking-wider">Our Heritage</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">The Journey of Our Organization</h2>
+          <p className="text-slate-600 max-w-xl mx-auto">Built on a foundation of professional rigor, ethical practice, and deep regulatory insight.</p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 relative">
+          {milestones.map((item, index) => (
+            <div key={index} className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between relative group hover:border-blue-300 transition-colors">
+              <div>
+                <span className="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider">
+                  {item.year}
+                </span>
+                <h3 className="text-xl font-bold text-slate-900 mt-4 mb-3">{item.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400 group-hover:text-blue-600 transition-colors">
+                Milestone 0{index + 1}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Services Section with Hover Animation */}
-      <section id="services" className="py-20 px-8 max-w-7xl mx-auto">
+      <section id="services" className="py-20 px-8 max-w-7xl mx-auto bg-slate-100/50 rounded-3xl my-10 border border-slate-200">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Our Comprehensive Practice Areas</h2>
+          <span className="text-blue-600 font-semibold text-sm uppercase tracking-wider">Core Offerings</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">Our Comprehensive Practice Areas</h2>
           <p className="text-slate-600 max-w-2xl mx-auto">Hover over any service card below to view detailed corporate and regulatory compliance solutions.</p>
         </div>
 
@@ -248,7 +338,7 @@ export default function Home() {
       <section id="contact" className="py-20 px-8 bg-white border-t border-slate-200">
         <div className="max-w-xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-slate-900 mb-3">Schedule a Consultation</h2>
+            <h2 className="text-3xl font-bold text-slate-900 mb-3">Schedule a Confidential Consultation</h2>
             <p className="text-slate-600">Get expert advice on your corporate, taxation, secretarial, or legal needs.</p>
           </div>
 
@@ -257,7 +347,8 @@ export default function Home() {
             method="POST" 
             className="space-y-6 bg-slate-50 p-8 rounded-2xl border border-slate-200 shadow-sm"
           >
-            <input type="hidden" name="apikey" value="51e34f82-a396-4171-893f-67f7d1cc32b4" />
+            {/* REPLACE WITH YOUR ACTUAL WEB3FORMS KEY */}
+            <input type="hidden" name="apikey" value="b5d8ed86-5013-4854-9fe4-29efbc0e7343" />
 
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">Full Name / Company Name</label>
@@ -307,15 +398,18 @@ export default function Home() {
               type="submit" 
               className="w-full bg-blue-600 text-white font-medium py-3 rounded-lg shadow hover:bg-blue-700 transition"
             >
-              Submit Inquiry
+              Submit Confidential Inquiry
             </button>
           </form>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
-        <p>© {new Date().getFullYear()} YourFirmName Advisors. All rights reserved. Professional Confidentiality Guaranteed.</p>
+      <footer className="bg-slate-900 text-slate-400 py-10 px-8 text-center text-sm border-t border-slate-800">
+        <div className="max-w-4xl mx-auto space-y-3">
+          <p className="font-semibold text-slate-300">YourFirmName Advisors — Legal, Secretarial, & Taxation Practice</p>
+          <p>© {new Date().getFullYear()} All rights reserved. Professional Confidentiality & Ethics Guaranteed.</p>
+        </div>
       </footer>
     </main>
   );
