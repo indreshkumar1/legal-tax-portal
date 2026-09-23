@@ -1,4 +1,4 @@
-'client'; 
+'use client'; 
 import { useState, useEffect } from 'react';
 
 export default function Home() {
@@ -318,8 +318,8 @@ export default function Home() {
             />
           </div>
           <div className="hidden sm:block border-l border-slate-800 pl-3.5">
-            <span className="font-extrabold text-sm tracking-wide text-white block">TriWise Partners</span>
-            <span className="text-cyan-400 font-semibold text-[10px] tracking-widest uppercase block">Govern | Grow | Lead</span>
+            <span className="font-extrabold text-sm tracking-wide text-white block">{firmName}</span>
+            <span className="text-cyan-400 font-semibold text-[10px] tracking-widest uppercase block">{firmTagline}</span>
           </div>
         </a>
 
@@ -349,7 +349,7 @@ export default function Home() {
           <div className="lg:col-span-6 text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold tracking-wider uppercase mb-6">
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-              Govern | Grow | Lead
+              {firmTagline}
             </div>
             
             <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white mb-6 leading-[1.1]">
@@ -357,7 +357,7 @@ export default function Home() {
             </h1>
             
             <p className="text-base text-slate-300 mb-8 leading-relaxed font-normal">
-              Empowering corporate boards, financial institutions, and emerging enterprises with airtight governance, complex NCLT frameworks, and expert multi-disciplinary compliance under TriWise Partners.
+              Empowering corporate boards, financial institutions, and emerging enterprises with airtight governance, complex NCLT frameworks, and expert multi-disciplinary compliance under {firmName}.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -456,7 +456,7 @@ export default function Home() {
             <span className="text-cyan-400 font-semibold text-xs uppercase tracking-widest bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">About Us</span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-4 mb-6">Pioneering Excellence in Corporate Counsel</h2>
             <p className="text-slate-300 text-sm leading-relaxed mb-4">
-              TriWise Partners is a premier multi-disciplinary legal, secretarial, and taxation advisory firm dedicated to guiding enterprises through complex regulatory landscapes. Our practice combines meticulous statutory compliance with aggressive, strategic advocacy.
+              {firmName} is a premier multi-disciplinary legal, secretarial, and taxation advisory firm dedicated to guiding enterprises through complex regulatory landscapes. Our practice combines meticulous statutory compliance with aggressive, strategic advocacy.
             </p>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
               Whether navigating NCLT proceedings, SEBI listing requirements, cross-border FEMA structures, or routine board governance, our seasoned professionals deliver precision-driven solutions tailored to institutional and high-growth objectives.
@@ -470,7 +470,7 @@ export default function Home() {
             </p>
             <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
               <span>Practice Leadership</span>
-              <span className="text-cyan-400 font-semibold">TriWise Partners Advisors</span>
+              <span className="text-cyan-400 font-semibold">{firmName} Advisors</span>
             </div>
           </div>
         </div>
@@ -603,7 +603,7 @@ export default function Home() {
       <section id="journey" className="py-24 px-6 lg:px-16 max-w-6xl mx-auto scroll-mt-24">
         <div className="text-center mb-16">
           <span className="text-cyan-400 font-semibold text-xs uppercase tracking-widest bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">Our Heritage</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">The Evolution of TriWise Partners</h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">The Evolution of {firmName}</h2>
           <p className="text-slate-400 max-w-xl mx-auto text-sm">Founded on the bedrock of ethical practice, deep regulatory insight, and unwavering client advocacy.</p>
         </div>
 
