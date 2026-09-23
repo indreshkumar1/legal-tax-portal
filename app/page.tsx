@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 export default function Home() {
-  const firmName = "Triwisepartners"; 
+  const firmName = "TriWisePartners"; 
   const companyPhone = "+91 (987) 654-3210";
   const companyEmail = "legal@triwisepartners.com";
   const companyAddress = "Plot No. 803, Sector 38, Gurgaon – 122002, Haryana, India ";
