@@ -1,14 +1,52 @@
 'use client'; 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
   const firmName = "TriWisePartners"; 
   const companyPhone = "+91 (987) 654-3210";
   const companyEmail = "legal@triwisepartners.com";
-  const companyAddress = "Plot No. 803, Sector 38, Gurgaon – 122002, Haryana, India ";
+  const companyAddress = " Plot No. 803, Sector 38, Gurgaon – 122002, Haryana, India ";
 
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedService, setSelectedService] = useState<any | null>(null);
+
+  // Carousel State
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const carouselSlides = [
+    {
+      title: "Corporate Law & NCLT Litigation",
+      subtitle: "Strategic structuring, mergers, amalgamations, and minority shareholder protection.",
+      image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200&auto=format&fit=crop",
+      tag: "Pillars 01 – 04"
+    },
+    {
+      title: "SEBI & Capital Market Compliance",
+      subtitle: "Continuous LODR compliance, ICDR capital issuances, takeover codes, and insider trading frameworks.",
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
+      tag: "Pillars 09 – 13"
+    },
+    {
+      title: "Taxation & FEMA Advisory",
+      subtitle: "Direct/indirect tax architecture, representation, foreign remittances, and RBI/FDI structuring.",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop",
+      tag: "Pillars 05 & 08"
+    },
+    {
+      title: "Secretarial Audits & Due Diligence",
+      subtitle: "Comprehensive corporate governance health checks, statutory register upkeep, and risk mitigation.",
+      image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1200&auto=format&fit=crop",
+      tag: "Pillars 14 – 17"
+    }
+  ];
+
+  // Auto-advance carousel every 6 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [carouselSlides.length]);
 
   // High-end subtle UI click sound using Web Audio API
   const playClickSound = () => {
@@ -268,7 +306,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Sticky Glassmorphism Navbar with Home, About Us, and Services Links */}
+      {/* Sticky Glassmorphism Navbar with Interactive Contact Us Key */}
       <nav className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 py-4 px-6 lg:px-16 flex justify-between items-center transition-all">
         <a href="#home" onClick={playClickSound} className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-900/30 text-white font-black text-lg border border-blue-400/30">
@@ -286,28 +324,36 @@ export default function Home() {
           <a href="#services" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Services</a>
           <a href="#journey" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Our Heritage</a>
           <a href="#credentials" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Why Us</a>
-          <a href="#contact" onClick={playClickSound} className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-blue-600/20 hover:scale-[1.02] transition-all">
-            Schedule Consultation
+          
+          {/* Interactive Key-Style Contact Us Button */}
+          <a 
+            href="#contact" 
+            onClick={playClickSound}
+            className="relative group overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-bold px-6 py-2.5 rounded-xl shadow-lg shadow-blue-600/30 border border-blue-400/40 hover:scale-105 active:scale-95 transition-all duration-200"
+          >
+            <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+            <span className="relative flex items-center gap-1.5">
+              <span>✉️</span> Contact Us
+            </span>
           </a>
         </div>
       </nav>
 
-      {/* Hero Section (Home) */}
-      <section id="home" className="relative pt-20 pb-28 px-6 lg:px-16 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
-        
+      {/* Hero Section with Interactive Service Carousel */}
+      <section id="home" className="relative pt-16 pb-24 px-6 lg:px-16 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center relative z-10">
-          <div className="lg:col-span-7 text-left">
+          
+          <div className="lg:col-span-6 text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold tracking-wider uppercase mb-6">
               <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
               Corporate Law • Secretarial • SEBI • Taxation
             </div>
             
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white mb-6 leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white mb-6 leading-[1.1]">
               Uncompromising Regulatory Precision & <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-500">Strategic Counsel</span>
             </h1>
             
-            <p className="text-lg text-slate-300 mb-10 leading-relaxed font-normal max-w-2xl">
+            <p className="text-base text-slate-300 mb-8 leading-relaxed font-normal">
               Empowering corporate boards, financial institutions, and emerging enterprises with airtight governance, complex NCLT frameworks, and expert multi-disciplinary compliance under {firmName}.
             </p>
 
@@ -315,48 +361,89 @@ export default function Home() {
               <a 
                 href="#contact" 
                 onClick={playClickSound}
-                className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-4 rounded-xl shadow-xl shadow-blue-600/30 text-center transition-all"
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl shadow-xl shadow-blue-600/30 text-center transition-all text-sm border border-blue-400/30 active:scale-95"
               >
-                Request Confidential Consultation
+                Contact Us
               </a>
               <a 
                 href="#services" 
                 onClick={playClickSound}
-                className="bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold px-8 py-4 rounded-xl border border-slate-700 text-center transition-all"
+                className="bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold px-8 py-3.5 rounded-xl border border-slate-700 text-center transition-all text-sm active:scale-95"
               >
                 Explore 17+ Practice Pillars ↓
               </a>
             </div>
           </div>
 
-          <div className="lg:col-span-5">
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl blur-xl opacity-40"></div>
-              <div className="relative bg-slate-900/90 border border-slate-800 p-6 rounded-3xl shadow-2xl backdrop-blur-xl">
-                <div className="relative h-80 rounded-2xl overflow-hidden mb-6 bg-slate-950 border border-slate-800">
-                  <img 
-                    src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000&auto=format&fit=crop" 
-                    alt="Elite Legal Workspace" 
-                    className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex flex-col justify-end p-6">
-                    <span className="text-blue-400 text-xs font-bold uppercase tracking-wider mb-1">Institutional Practice</span>
-                    <h3 className="text-xl font-bold text-white">Excellence in Statutory Frameworks</h3>
+          {/* Interactive Front Service Carousel */}
+          <div className="lg:col-span-6">
+            <div className="relative bg-slate-900/90 border border-slate-800 p-5 rounded-3xl shadow-2xl backdrop-blur-xl">
+              <div className="relative h-80 sm:h-96 rounded-2xl overflow-hidden bg-slate-950 border border-slate-800">
+                {carouselSlides.map((slide, idx) => (
+                  <div
+                    key={idx}
+                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                      idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                    }`}
+                  >
+                    <img 
+                      src={slide.image} 
+                      alt={slide.title} 
+                      className="w-full h-full object-cover opacity-75"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent flex flex-col justify-end p-6 sm:p-8">
+                      <span className="text-blue-400 text-xs font-bold uppercase tracking-wider mb-2 bg-blue-500/20 px-3 py-1 rounded-full w-fit border border-blue-500/30">
+                        {slide.tag}
+                      </span>
+                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">{slide.title}</h3>
+                      <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">{slide.subtitle}</p>
+                    </div>
                   </div>
+                ))}
+              </div>
+
+              {/* Carousel Navigation Buttons & Dots */}
+              <div className="flex justify-between items-center mt-4 px-2">
+                <div className="flex gap-2">
+                  {carouselSlides.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        playClickSound();
+                        setCurrentSlide(idx);
+                      }}
+                      className={`h-2 rounded-full transition-all ${
+                        idx === currentSlide ? 'w-8 bg-blue-500' : 'w-2 bg-slate-700'
+                      }`}
+                      aria-label={`Slide ${idx + 1}`}
+                    />
+                  ))}
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
-                    <div className="text-blue-400 text-2xl font-black mb-1">17+</div>
-                    <div className="text-slate-300 text-xs font-medium">Specialized Practice Verticals</div>
-                  </div>
-                  <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
-                    <div className="text-blue-400 text-2xl font-black mb-1">100%</div>
-                    <div className="text-slate-300 text-xs font-medium">Confidential & Secure</div>
-                  </div>
+                
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => {
+                      playClickSound();
+                      setCurrentSlide((prev) => (prev - 1 + carouselSlides.length) % carouselSlides.length);
+                    }}
+                    className="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white flex items-center justify-center font-bold text-sm transition-all"
+                  >
+                    ←
+                  </button>
+                  <button
+                    onClick={() => {
+                      playClickSound();
+                      setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
+                    }}
+                    className="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white flex items-center justify-center font-bold text-sm transition-all"
+                  >
+                    →
+                  </button>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
       </section>
 
@@ -568,7 +655,7 @@ export default function Home() {
       <section id="contact" className="py-24 px-6 lg:px-16 max-w-5xl mx-auto scroll-mt-24">
         <div className="text-center mb-12">
           <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Get In Touch</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-3">Schedule a Confidential Consultation</h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-3">Contact Us</h2>
           <p className="text-slate-400 text-sm">Connect directly via office, phone, or submit your requirement securely below.</p>
         </div>
 
