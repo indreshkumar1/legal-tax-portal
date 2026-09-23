@@ -5,7 +5,7 @@ export default function Home() {
   const firmName = "TriWisePartners"; 
   const companyPhone = "+91 (987) 654-3210";
   const companyEmail = "legal@triwisepartners.com";
-  const companyAddress = " Plot No. 803, Sector 38, Gurgaon – 122002, Haryana, India ";
+  const companyAddress = "Plot No. 803, Sector 38, Gurgaon – 122002, Haryana, India";
 
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedService, setSelectedService] = useState<any | null>(null);
@@ -306,7 +306,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Sticky Glassmorphism Navbar with Interactive Contact Us Key */}
+      {/* Sticky Glassmorphism Navbar */}
       <nav className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 py-4 px-6 lg:px-16 flex justify-between items-center transition-all">
         <a href="#home" onClick={playClickSound} className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-900/30 text-white font-black text-lg border border-blue-400/30">
@@ -325,7 +325,6 @@ export default function Home() {
           <a href="#journey" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Our Heritage</a>
           <a href="#credentials" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Why Us</a>
           
-          {/* Interactive Key-Style Contact Us Button */}
           <a 
             href="#contact" 
             onClick={playClickSound}
@@ -339,7 +338,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section with Interactive Service Carousel */}
+      {/* Hero Section */}
       <section id="home" className="relative pt-16 pb-24 px-6 lg:px-16 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center relative z-10">
           
@@ -651,94 +650,121 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact & Consultation Section */}
-      <section id="contact" className="py-24 px-6 lg:px-16 max-w-5xl mx-auto scroll-mt-24">
-        <div className="text-center mb-12">
+      {/* Contact & Consultation Section - Redesigned Split Page Layout */}
+      <section id="contact" className="py-24 px-6 lg:px-16 max-w-7xl mx-auto scroll-mt-24">
+        <div className="text-center mb-16">
           <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Get In Touch</span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-3">Contact Us</h2>
-          <p className="text-slate-400 text-sm">Connect directly via office, phone, or submit your requirement securely below.</p>
+          <p className="text-slate-400 text-sm">Connect directly via our head office, phone line, or submit your requirement securely below.</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-            <div className="text-2xl mb-2">📍</div>
-            <h4 className="font-bold text-white text-sm mb-1">Head Office</h4>
-            <p className="text-slate-400 text-xs leading-relaxed">{companyAddress}</p>
+        {/* Two-Column Split Layout: Left Info Cards & Right Inquiry Form */}
+        <div className="grid lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Left Column: Information Cards Stacked */}
+          <div className="lg:col-span-5 space-y-6">
+            {/* Head Office Card */}
+            <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
+              <div className="text-2xl p-3 bg-slate-950 rounded-xl border border-slate-800">📍</div>
+              <div>
+                <h4 className="font-bold text-white text-sm mb-1">Head Office</h4>
+                <p className="text-slate-400 text-xs leading-relaxed">{companyAddress}</p>
+              </div>
+            </div>
+
+            {/* Direct Line Card */}
+            <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
+              <div className="text-2xl p-3 bg-slate-950 rounded-xl border border-slate-800">📞</div>
+              <div>
+                <h4 className="font-bold text-white text-sm mb-1">Direct Line</h4>
+                <p className="text-slate-400 text-xs">
+                  <a href={`tel:${companyPhone}`} onClick={playClickSound} className="text-blue-400 hover:underline">{companyPhone}</a>
+                </p>
+                <p className="text-slate-500 text-[10px] mt-1">Mon – Fri: 9:00 AM – 7:00 PM IST</p>
+              </div>
+            </div>
+
+            {/* Official Email Card */}
+            <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
+              <div className="text-2xl p-3 bg-slate-950 rounded-xl border border-slate-800">✉️</div>
+              <div>
+                <h4 className="font-bold text-white text-sm mb-1">Official Email</h4>
+                <p className="text-slate-400 text-xs">
+                  <a href={`mailto:${companyEmail}`} onClick={playClickSound} className="text-blue-400 hover:underline">{companyEmail}</a>
+                </p>
+                <p className="text-slate-500 text-[10px] mt-1">Encrypted & Confidential Channels</p>
+              </div>
+            </div>
           </div>
-          <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-            <div className="text-2xl mb-2">📞</div>
-            <h4 className="font-bold text-white text-sm mb-1">Direct Line</h4>
-            <p className="text-slate-400 text-xs"><a href={`tel:${companyPhone}`} onClick={playClickSound} className="text-blue-400 hover:underline">{companyPhone}</a></p>
-          </div>
-          <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl text-center">
-            <div className="text-2xl mb-2">✉️</div>
-            <h4 className="font-bold text-white text-sm mb-1">Official Email</h4>
-            <p className="text-slate-400 text-xs"><a href={`mailto:${companyEmail}`} onClick={playClickSound} className="text-blue-400 hover:underline">{companyEmail}</a></p>
-          </div>
-        </div>
 
-        <div className="bg-slate-900 border border-slate-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
-          <form 
-            action="https://api.web3forms.com/submit" 
-            method="POST" 
-            className="space-y-6 max-w-xl mx-auto"
-          >
-            <input type="hidden" name="apikey" value="b5d8ed86-5013-4854-9fe4-29efbc0e7343" />
+          {/* Right Column: Secure Inquiry Form */}
+          <div className="lg:col-span-7 bg-slate-900 border border-slate-800 p-8 sm:p-10 rounded-3xl shadow-2xl">
+            <h3 className="text-xl font-bold text-white mb-2">Send a Secure Inquiry</h3>
+            <p className="text-slate-400 text-xs mb-6">Our advisory team will review your requirements and respond within 24 hours.</p>
 
-            <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Full Name / Corporate Entity</label>
-              <input 
-                type="text" 
-                name="name"
-                placeholder="Enter your name or organization" 
-                className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Official Email Address</label>
-              <input 
-                type="email" 
-                name="email"
-                placeholder="you@company.com" 
-                className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Practice Domain Required</label>
-              <select 
-                name="service"
-                className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-              >
-                {coreServices.map((s, idx) => (
-                  <option key={idx} value={`${s.number} - ${s.title}`} className="bg-slate-900 text-white">
-                    {s.number} - {s.title}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Inquiry Details / Scope</label>
-              <textarea 
-                name="message"
-                rows={4} 
-                placeholder="Briefly describe your requirements or consultation needs..." 
-                className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-              ></textarea>
-            </div>
-
-            <button 
-              type="submit" 
-              onClick={playClickSound}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-4 rounded-xl shadow-xl shadow-blue-600/35 transition-all"
+            <form 
+              action="https://api.web3forms.com/submit" 
+              method="POST" 
+              className="space-y-5"
             >
-              Submit Confidential Inquiry Securely
-            </button>
-          </form>
+              <input type="hidden" name="apikey" value="b5d8ed86-5013-4854-9fe4-29efbc0e7343" />
+
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Full Name / Corporate Entity</label>
+                <input 
+                  type="text" 
+                  name="name"
+                  placeholder="Enter your name or organization" 
+                  className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Official Email Address</label>
+                <input 
+                  type="email" 
+                  name="email"
+                  placeholder="you@company.com" 
+                  className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Practice Domain Required</label>
+                <select 
+                  name="service"
+                  className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                >
+                  {coreServices.map((s, idx) => (
+                    <option key={idx} value={`${s.number} - ${s.title}`} className="bg-slate-900 text-white">
+                      {s.number} - {s.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Inquiry Details / Scope</label>
+                <textarea 
+                  name="message"
+                  rows={4} 
+                  placeholder="Briefly describe your requirements or consultation needs..." 
+                  className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                ></textarea>
+              </div>
+
+              <button 
+                type="submit" 
+                onClick={playClickSound}
+                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-4 rounded-xl shadow-xl shadow-blue-600/35 transition-all text-sm"
+              >
+                Submit Confidential Inquiry Securely
+              </button>
+            </form>
+          </div>
+
         </div>
       </section>
 
