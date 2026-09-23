@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 export default function Home() {
   const firmName = "TriWise Partners"; 
   const firmTagline = "Govern | Grow | Lead";
-  const companyPhone = "+91 9808414803";
+  const companyPhone = "+91 (987) 654-3210";
   const companyEmail = "legal@triwisepartners.com";
   const companyAddress = "Plot No. 803, Sector 38, Gurgaon – 122002, Haryana, India";
   const companyMapsUrl = "https://maps.google.com/?q=Plot+No.+803,+Sector+38,+Gurgaon+122002,+Haryana,+India";
@@ -477,14 +477,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-24 px-6 lg:px-16 max-w-7xl mx-auto bg-slate-900/40 rounded-3xl border border-slate-800/80 my-10 scroll-mt-24">
+      {/* Revamped Interactive Services Section */}
+      <section id="services" className="py-24 px-6 lg:px-16 max-w-7xl mx-auto bg-gradient-to-b from-slate-900/60 via-slate-900/30 to-slate-950 rounded-3xl border border-slate-800/80 my-10 scroll-mt-24 shadow-2xl">
         <div className="text-center mb-12">
-          <span className="text-cyan-400 font-semibold text-xs uppercase tracking-widest bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">Services</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">Explore Our 17 Practice Pillars</h2>
-          <p className="text-slate-400 max-w-2xl mx-auto text-sm mb-8">Click any category navigation button below to filter specific legal & financial domains instantly.</p>
+          <span className="text-cyan-400 font-semibold text-xs uppercase tracking-widest bg-cyan-500/10 px-3.5 py-1.5 rounded-full border border-cyan-500/20 shadow-sm">Practice Pillars</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">17 Specialized Domains of Expertise</h2>
+          <p className="text-slate-400 max-w-2xl mx-auto text-sm mb-8">Select a practice category below to inspect our core advisory framework and scope of work.</p>
 
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-2.5">
             {categories.map((cat, idx) => (
               <button
                 key={idx}
@@ -494,8 +494,8 @@ export default function Home() {
                 }}
                 className={`px-5 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all ${
                   activeCategory === cat 
-                    ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-600/30 border border-cyan-400/40' 
-                    : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 hover:text-white'
+                    ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg shadow-cyan-600/30 border border-cyan-400/40 scale-105' 
+                    : 'bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-slate-700 hover:text-white'
                 }`}
               >
                 {cat} {cat === 'All' ? `(${coreServices.length})` : `(${coreServices.filter(s => s.category === cat).length})`}
@@ -512,27 +512,33 @@ export default function Home() {
                 playClickSound();
                 setSelectedService(service);
               }}
-              className="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 hover:bg-slate-900/80 transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-xl relative overflow-hidden"
+              className="bg-gradient-to-br from-slate-900/90 via-slate-900 to-slate-950 border border-slate-800/80 p-7 rounded-3xl hover:border-cyan-500/60 hover:shadow-cyan-500/10 hover:shadow-2xl transition-all duration-300 group cursor-pointer flex flex-col justify-between relative overflow-hidden"
             >
+              <div className="absolute top-0 right-0 w-28 h-28 bg-cyan-500/5 rounded-bl-full pointer-events-none group-hover:bg-cyan-500/10 transition-colors"></div>
+
               <div>
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-xl font-black text-cyan-400">{service.number}</span>
-                  <span className="text-2xl p-2 bg-slate-950 rounded-xl border border-slate-800">{service.icon}</span>
+                <div className="flex justify-between items-center mb-5">
+                  <span className="text-2xl font-black font-mono text-cyan-400 tracking-wider bg-cyan-500/10 px-3 py-1 rounded-xl border border-cyan-500/20">
+                    {service.number}
+                  </span>
+                  <span className="text-3xl p-2.5 bg-slate-950/80 rounded-2xl border border-slate-800 group-hover:scale-110 transition-transform">
+                    {service.icon}
+                  </span>
                 </div>
                 
-                <span className="inline-block text-[10px] font-bold text-cyan-400 bg-cyan-500/10 px-2.5 py-0.5 rounded-md mb-2 border border-cyan-500/20">
+                <span className="inline-block text-[10px] font-bold text-cyan-300 bg-cyan-500/15 px-3 py-1 rounded-md mb-3 border border-cyan-500/25 uppercase tracking-wider">
                   {service.category}
                 </span>
 
-                <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors mb-1">
+                <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors mb-2 leading-snug">
                   {service.title}
                 </h3>
-                <p className="text-xs text-slate-400 font-medium mb-4">{service.subtitle}</p>
+                <p className="text-xs text-slate-400 font-normal mb-6 leading-relaxed line-clamp-2">{service.subtitle}</p>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-800/60 flex items-center justify-between text-xs font-semibold text-slate-400 group-hover:text-cyan-400 transition-colors">
-                <span>Click to view full scope →</span>
-                <span className="bg-cyan-600/20 text-cyan-400 p-1.5 rounded-lg group-hover:bg-cyan-600 group-hover:text-white transition-all">+</span>
+              <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-semibold text-slate-300 group-hover:text-cyan-400 transition-colors">
+                <span className="flex items-center gap-1.5">View Comprehensive Scope</span>
+                <span className="w-8 h-8 rounded-xl bg-cyan-600/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center group-hover:bg-cyan-600 group-hover:text-white transition-all font-bold">→</span>
               </div>
             </div>
           ))}
@@ -553,8 +559,8 @@ export default function Home() {
               ✕
             </button>
             
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-3xl p-3 bg-slate-950 rounded-2xl border border-slate-800">{selectedService.icon}</span>
+            <div className="flex items-center gap-4 mb-4">
+              <span className="text-4xl p-3 bg-slate-950 rounded-2xl border border-slate-800">{selectedService.icon}</span>
               <div>
                 <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider">{selectedService.category} • Pillar {selectedService.number}</span>
                 <h3 className="text-2xl font-black text-white">{selectedService.title}</h3>
@@ -568,7 +574,7 @@ export default function Home() {
             <h4 className="text-xs font-bold uppercase tracking-wider text-cyan-400 mb-3">Comprehensive Compliance & Advisory Scope:</h4>
             <ul className="space-y-3 mb-8">
               {selectedService.details.map((detail: string, idx: number) => (
-                <li key={idx} className="text-slate-300 text-xs sm:text-sm flex items-start bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+                <li key={idx} className="text-slate-300 text-xs sm:text-sm flex items-start bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
                   <span className="text-cyan-400 mr-3 font-bold mt-0.5">▪</span>
                   <span className="leading-relaxed">{detail}</span>
                 </li>
@@ -582,7 +588,7 @@ export default function Home() {
                   playClickSound();
                   setSelectedService(null);
                 }}
-                className="flex-1 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold py-3.5 rounded-xl text-center text-sm shadow-lg shadow-cyan-600/30 transition-all"
+                className="flex-1 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold py-3.5 rounded-xl text-center text-sm shadow-lg shadow-cyan-600/30 transition-all"
               >
                 Inquire About This Service
               </a>
@@ -633,7 +639,7 @@ export default function Home() {
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
               <div className="text-2xl p-3 bg-slate-950 rounded-xl border border-slate-800">📍</div>
-             <div>
+              <div>
                 <h4 className="font-bold text-white text-sm mb-1">Head Office</h4>
                 <a 
                   href={companyMapsUrl} 
@@ -673,7 +679,7 @@ export default function Home() {
             <p className="text-slate-400 text-xs mb-6">Our advisory team will review your requirements and respond within 24 hours.</p>
 
             <form action="https://api.web3forms.com/submit" method="POST" className="space-y-5">
-              <input type="hidden" name="apikey" value="b5d8ed86-5013-4854-9fe4-29efbc0e7343" />
+              <input type="hidden" name="apikey" value="51e34f82-a396-4171-893f-67f7d1cc32b4" />
 
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Full Name / Corporate Entity</label>
@@ -713,7 +719,12 @@ export default function Home() {
       <footer className="bg-slate-950 border-t border-slate-800/80 py-12 px-6 lg:px-16 text-center text-xs text-slate-500">
         <div className="max-w-4xl mx-auto space-y-3">
           <p className="font-bold text-slate-300 text-sm">{firmName} ({firmTagline}) — Corporate Law, Secretarial, & Taxation Counsel</p>
-          <p>{companyAddress} | Direct Line: {companyPhone}</p>
+          <p>
+            <a href={companyMapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors underline">
+              {companyAddress}
+            </a> 
+            {" "} | Direct Line: {companyPhone}
+          </p>
           <p className="pt-4 border-t border-slate-900">© {new Date().getFullYear()} {firmName}. All rights reserved. Professional Confidentiality & Ethical Standards Maintained.</p>
         </div>
       </footer>
