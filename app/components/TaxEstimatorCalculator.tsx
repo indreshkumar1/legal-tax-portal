@@ -26,8 +26,6 @@ export default function TaxEstimatorCalculator() {
         <p className="text-slate-400 text-sm mt-1">Configure your requirements for an immediate baseline estimate.</p>
       </div>
 
-      <TaxEstimatorCalculator/>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Service Selection */}
         <div>
