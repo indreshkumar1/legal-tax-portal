@@ -1,8 +1,10 @@
 'use client'; 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Home() {
-  const firmName = "TriWisePartners"; 
+  const firmName = "TRIWISE PARTNERS"; 
+  const firmTagline = "Govern | Grow | Lead";
   const companyPhone = "+91 (987) 654-3210";
   const companyEmail = "legal@triwisepartners.com";
   const companyAddress = "Plot No. 803, Sector 38, Gurgaon – 122002, Haryana, India";
@@ -306,15 +308,23 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Sticky Glassmorphism Navbar */}
-      <nav className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 py-4 px-6 lg:px-16 flex justify-between items-center transition-all">
-        <a href="#home" onClick={playClickSound} className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-900/30 text-white font-black text-lg border border-blue-400/30">
-            {firmName.charAt(0)}
+      {/* Sticky Glassmorphism Navbar with Official Logo Integration */}
+      <nav className="sticky top-0 z-50 bg-slate-950/85 backdrop-blur-md border-b border-slate-800 py-3.5 px-6 lg:px-16 flex justify-between items-center transition-all">
+        <a href="#home" onClick={playClickSound} className="flex items-center gap-3.5 group">
+          {/* Logo Container with Dark Shield Glow */}
+          <div className="bg-white px-3 py-1.5 rounded-xl shadow-lg border border-slate-700 flex items-center justify-center group-hover:border-blue-500 transition-colors">
+            <Image 
+              src="/logo.png" 
+              alt="Triwise Partners Logo" 
+              width={130} 
+              height={38} 
+              className="object-contain h-8 w-auto"
+              priority
+            />
           </div>
-          <div>
-            <span className="font-extrabold text-xl tracking-tight text-white">{firmName}</span>
-            <span className="text-blue-500 font-semibold text-xs block tracking-widest uppercase">Advisors & Counsel</span>
+          <div className="hidden sm:block border-l border-slate-800 pl-3.5">
+            <span className="font-extrabold text-sm tracking-wide text-white block">{firmName}</span>
+            <span className="text-blue-400 font-semibold text-[10px] tracking-widest uppercase block">{firmTagline}</span>
           </div>
         </a>
 
@@ -338,14 +348,14 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section with Interactive Service Carousel */}
       <section id="home" className="relative pt-16 pb-24 px-6 lg:px-16 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center relative z-10">
           
           <div className="lg:col-span-6 text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold tracking-wider uppercase mb-6">
               <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-              Corporate Law • Secretarial • SEBI • Taxation
+              {firmTagline}
             </div>
             
             <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white mb-6 leading-[1.1]">
@@ -650,7 +660,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact & Consultation Section - Redesigned Split Page Layout */}
+      {/* Contact & Consultation Section */}
       <section id="contact" className="py-24 px-6 lg:px-16 max-w-7xl mx-auto scroll-mt-24">
         <div className="text-center mb-16">
           <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Get In Touch</span>
@@ -658,12 +668,10 @@ export default function Home() {
           <p className="text-slate-400 text-sm">Connect directly via our head office, phone line, or submit your requirement securely below.</p>
         </div>
 
-        {/* Two-Column Split Layout: Left Info Cards & Right Inquiry Form */}
         <div className="grid lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left Column: Information Cards Stacked */}
+          {/* Left Column: Information Cards */}
           <div className="lg:col-span-5 space-y-6">
-            {/* Head Office Card */}
             <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
               <div className="text-2xl p-3 bg-slate-950 rounded-xl border border-slate-800">📍</div>
               <div>
@@ -672,7 +680,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Direct Line Card */}
             <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
               <div className="text-2xl p-3 bg-slate-950 rounded-xl border border-slate-800">📞</div>
               <div>
@@ -684,7 +691,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Official Email Card */}
             <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
               <div className="text-2xl p-3 bg-slate-950 rounded-xl border border-slate-800">✉️</div>
               <div>
@@ -771,9 +777,9 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-slate-950 border-t border-slate-800/80 py-12 px-6 lg:px-16 text-center text-xs text-slate-500">
         <div className="max-w-4xl mx-auto space-y-3">
-          <p className="font-bold text-slate-300 text-sm">{firmName} Advisors — Corporate Law, Secretarial, & Taxation Counsel</p>
+          <p className="font-bold text-slate-300 text-sm">{firmName} ({firmTagline}) — Corporate Law, Secretarial, & Taxation Counsel</p>
           <p>{companyAddress} | Direct Line: {companyPhone}</p>
-          <p className="pt-4 border-t border-slate-900">© {new Date().getFullYear()} {firmName} Advisors. All rights reserved. Professional Confidentiality & Ethical Standards Maintained.</p>
+          <p className="pt-4 border-t border-slate-900">© {new Date().getFullYear()} {firmName}. All rights reserved. Professional Confidentiality & Ethical Standards Maintained.</p>
         </div>
       </footer>
     </main>
