@@ -1,9 +1,8 @@
-'use client'; 
+'client'; 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 export default function Home() {
-  const firmName = "TRIWISE PARTNERS"; 
+  const firmName = "TriWise Partners"; 
   const firmTagline = "Govern | Grow | Lead";
   const companyPhone = "+91 (987) 654-3210";
   const companyEmail = "legal@triwisepartners.com";
@@ -288,19 +287,19 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 selection:bg-blue-600 selection:text-white font-sans scroll-smooth">
+    <main className="min-h-screen bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950 font-sans scroll-smooth">
       
       {/* Top Utility Announcement Bar */}
       <div className="bg-slate-900 border-b border-slate-800 text-slate-300 text-xs py-2.5 px-6 lg:px-16 flex flex-col sm:flex-row justify-between items-center gap-2">
         <div className="flex flex-wrap items-center gap-6">
-          <a href={`tel:${companyPhone}`} className="flex items-center gap-2 hover:text-blue-400 transition-colors">
-            <span className="text-blue-500">📞</span> {companyPhone}
+          <a href={`tel:${companyPhone}`} className="flex items-center gap-2 hover:text-cyan-400 transition-colors">
+            <span className="text-cyan-400">📞</span> {companyPhone}
           </a>
-          <a href={`mailto:${companyEmail}`} className="flex items-center gap-2 hover:text-blue-400 transition-colors">
-            <span className="text-blue-500">✉️</span> {companyEmail}
+          <a href={`mailto:${companyEmail}`} className="flex items-center gap-2 hover:text-cyan-400 transition-colors">
+            <span className="text-cyan-400">✉️</span> {companyEmail}
           </a>
           <span className="hidden xl:flex items-center gap-2 text-slate-400">
-            <span className="text-emerald-500">●</span> Strict Client Data Privacy & NDAs Guaranteed
+            <span className="text-emerald-400">●</span> Strict Client Data Privacy & NDAs Guaranteed
           </span>
         </div>
         <div className="text-slate-400 font-medium">
@@ -308,35 +307,33 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Sticky Glassmorphism Navbar with Official Logo Integration */}
-      {/* Sticky Glassmorphism Navbar with Official Logo Integration */}
+      {/* Sticky Glassmorphism Navbar */}
       <nav className="sticky top-0 z-50 bg-slate-950/85 backdrop-blur-md border-b border-slate-800 py-3.5 px-6 lg:px-16 flex justify-between items-center transition-all">
         <a href="#home" onClick={playClickSound} className="flex items-center gap-3.5 group">
-          {/* Logo Container */}
-          <div className="bg-white px-3 py-1.5 rounded-xl shadow-lg border border-slate-700 flex items-center justify-center">
+          <div className="bg-white px-3 py-1.5 rounded-xl shadow-lg border border-slate-700 flex items-center justify-center group-hover:border-cyan-400 transition-colors">
             <img 
               src="/logo.png" 
-              alt="Triwise Partners Logo" 
+              alt="TriWise Partners Logo" 
               className="h-8 w-auto object-contain"
             />
           </div>
           <div className="hidden sm:block border-l border-slate-800 pl-3.5">
-            <span className="font-extrabold text-sm tracking-wide text-white block">{firmName}</span>
-            <span className="text-blue-400 font-semibold text-[10px] tracking-widest uppercase block">{firmTagline}</span>
+            <span className="font-extrabold text-sm tracking-wide text-white block">TriWise Partners</span>
+            <span className="text-cyan-400 font-semibold text-[10px] tracking-widest uppercase block">Govern | Grow | Lead</span>
           </div>
         </a>
 
         <div className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
-          <a href="#home" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Home</a>
-          <a href="#about" onClick={playClickSound} className="hover:text-blue-400 transition-colors">About Us</a>
-          <a href="#services" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Services</a>
-          <a href="#journey" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Our Heritage</a>
-          <a href="#credentials" onClick={playClickSound} className="hover:text-blue-400 transition-colors">Why Us</a>
+          <a href="#home" onClick={playClickSound} className="hover:text-cyan-400 transition-colors">Home</a>
+          <a href="#about" onClick={playClickSound} className="hover:text-cyan-400 transition-colors">About Us</a>
+          <a href="#services" onClick={playClickSound} className="hover:text-cyan-400 transition-colors">Services</a>
+          <a href="#journey" onClick={playClickSound} className="hover:text-cyan-400 transition-colors">Our Heritage</a>
+          <a href="#credentials" onClick={playClickSound} className="hover:text-cyan-400 transition-colors">Why Us</a>
           
           <a 
             href="#contact" 
             onClick={playClickSound}
-            className="relative group overflow-hidden bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white font-bold px-6 py-2.5 rounded-xl shadow-lg shadow-blue-600/30 border border-blue-400/40 hover:scale-105 active:scale-95 transition-all duration-200"
+            className="relative group overflow-hidden bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-700 text-white font-bold px-6 py-2.5 rounded-xl shadow-lg shadow-cyan-600/30 border border-cyan-400/40 hover:scale-105 active:scale-95 transition-all duration-200"
           >
             <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></span>
             <span className="relative flex items-center gap-1.5">
@@ -346,29 +343,28 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section with Interactive Service Carousel */}
+      {/* Hero Section */}
       <section id="home" className="relative pt-16 pb-24 px-6 lg:px-16 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center relative z-10">
-          
           <div className="lg:col-span-6 text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold tracking-wider uppercase mb-6">
-              <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-              {firmTagline}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold tracking-wider uppercase mb-6">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+              Govern | Grow | Lead
             </div>
             
             <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white mb-6 leading-[1.1]">
-              Uncompromising Regulatory Precision & <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-500">Strategic Counsel</span>
+              Uncompromising Regulatory Precision & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-500">Strategic Counsel</span>
             </h1>
             
             <p className="text-base text-slate-300 mb-8 leading-relaxed font-normal">
-              Empowering corporate boards, financial institutions, and emerging enterprises with airtight governance, complex NCLT frameworks, and expert multi-disciplinary compliance under {firmName}.
+              Empowering corporate boards, financial institutions, and emerging enterprises with airtight governance, complex NCLT frameworks, and expert multi-disciplinary compliance under TriWise Partners.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
                 href="#contact" 
                 onClick={playClickSound}
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold px-8 py-3.5 rounded-xl shadow-xl shadow-blue-600/30 text-center transition-all text-sm border border-blue-400/30 active:scale-95"
+                className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold px-8 py-3.5 rounded-xl shadow-xl shadow-cyan-600/30 text-center transition-all text-sm border border-cyan-400/30 active:scale-95"
               >
                 Contact Us
               </a>
@@ -399,7 +395,7 @@ export default function Home() {
                       className="w-full h-full object-cover opacity-75"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent flex flex-col justify-end p-6 sm:p-8">
-                      <span className="text-blue-400 text-xs font-bold uppercase tracking-wider mb-2 bg-blue-500/20 px-3 py-1 rounded-full w-fit border border-blue-500/30">
+                      <span className="text-cyan-400 text-xs font-bold uppercase tracking-wider mb-2 bg-cyan-500/20 px-3 py-1 rounded-full w-fit border border-cyan-500/30">
                         {slide.tag}
                       </span>
                       <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">{slide.title}</h3>
@@ -420,7 +416,7 @@ export default function Home() {
                         setCurrentSlide(idx);
                       }}
                       className={`h-2 rounded-full transition-all ${
-                        idx === currentSlide ? 'w-8 bg-blue-500' : 'w-2 bg-slate-700'
+                        idx === currentSlide ? 'w-8 bg-cyan-400' : 'w-2 bg-slate-700'
                       }`}
                       aria-label={`Slide ${idx + 1}`}
                     />
@@ -450,7 +446,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -458,34 +453,24 @@ export default function Home() {
       <section id="about" className="py-24 px-6 lg:px-16 max-w-6xl mx-auto scroll-mt-24 border-t border-slate-800/80">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">About Us</span>
+            <span className="text-cyan-400 font-semibold text-xs uppercase tracking-widest bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">About Us</span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-4 mb-6">Pioneering Excellence in Corporate Counsel</h2>
             <p className="text-slate-300 text-sm leading-relaxed mb-4">
-              {firmName} is a premier multi-disciplinary legal, secretarial, and taxation advisory firm dedicated to guiding enterprises through complex regulatory landscapes. Our practice combines meticulous statutory compliance with aggressive, strategic advocacy.
+              TriWise Partners is a premier multi-disciplinary legal, secretarial, and taxation advisory firm dedicated to guiding enterprises through complex regulatory landscapes. Our practice combines meticulous statutory compliance with aggressive, strategic advocacy.
             </p>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
               Whether navigating NCLT proceedings, SEBI listing requirements, cross-border FEMA structures, or routine board governance, our seasoned professionals deliver precision-driven solutions tailored to institutional and high-growth objectives.
             </p>
-            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-800">
-              <div>
-                <h4 className="text-white font-bold text-base mb-1">Ethical Integrity</h4>
-                <p className="text-slate-400 text-xs">Uncompromising adherence to professional standards and complete discretion.</p>
-              </div>
-              <div>
-                <h4 className="text-white font-bold text-base mb-1">Regulatory Sync</h4>
-                <p className="text-slate-400 text-xs">Real-time alignment with shifting statutory frameworks across MCA, RBI, and Tax authorities.</p>
-              </div>
-            </div>
           </div>
           <div className="bg-slate-900 border border-slate-800 p-8 rounded-3xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-2xl"></div>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl"></div>
             <h3 className="text-xl font-bold text-white mb-4">Core Philosophy</h3>
             <p className="text-slate-300 text-sm leading-relaxed mb-6">
               "We believe that robust corporate governance is not merely a compliance burden, but a formidable strategic asset that shields enterprises and unlocks long-term valuation."
             </p>
             <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
               <span>Practice Leadership</span>
-              <span className="text-blue-400 font-semibold">{firmName} Advisors</span>
+              <span className="text-cyan-400 font-semibold">TriWise Partners Advisors</span>
             </div>
           </div>
         </div>
@@ -494,11 +479,10 @@ export default function Home() {
       {/* Services Section */}
       <section id="services" className="py-24 px-6 lg:px-16 max-w-7xl mx-auto bg-slate-900/40 rounded-3xl border border-slate-800/80 my-10 scroll-mt-24">
         <div className="text-center mb-12">
-          <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Services</span>
+          <span className="text-cyan-400 font-semibold text-xs uppercase tracking-widest bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">Services</span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">Explore Our 17 Practice Pillars</h2>
           <p className="text-slate-400 max-w-2xl mx-auto text-sm mb-8">Click any category navigation button below to filter specific legal & financial domains instantly.</p>
 
-          {/* Interactive Navigation Filtering Bar */}
           <div className="flex flex-wrap justify-center gap-3">
             {categories.map((cat, idx) => (
               <button
@@ -509,7 +493,7 @@ export default function Home() {
                 }}
                 className={`px-5 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all ${
                   activeCategory === cat 
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 border border-blue-400/40' 
+                    ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-600/30 border border-cyan-400/40' 
                     : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700 hover:text-white'
                 }`}
               >
@@ -519,7 +503,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Services Grid with Click Feedback */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredServices.map((service, index) => (
             <div 
@@ -528,35 +511,34 @@ export default function Home() {
                 playClickSound();
                 setSelectedService(service);
               }}
-              className="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-blue-500/50 hover:bg-slate-900/80 transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-xl relative overflow-hidden"
+              className="bg-slate-900 border border-slate-800 p-6 rounded-2xl hover:border-cyan-500/50 hover:bg-slate-900/80 transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-xl relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-bl-full pointer-events-none group-hover:bg-blue-500/10 transition-colors"></div>
               <div>
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-xl font-black text-blue-400">{service.number}</span>
+                  <span className="text-xl font-black text-cyan-400">{service.number}</span>
                   <span className="text-2xl p-2 bg-slate-950 rounded-xl border border-slate-800">{service.icon}</span>
                 </div>
                 
-                <span className="inline-block text-[10px] font-bold text-blue-400 bg-blue-500/10 px-2.5 py-0.5 rounded-md mb-2 border border-blue-500/20">
+                <span className="inline-block text-[10px] font-bold text-cyan-400 bg-cyan-500/10 px-2.5 py-0.5 rounded-md mb-2 border border-cyan-500/20">
                   {service.category}
                 </span>
 
-                <h3 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors mb-1">
+                <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors mb-1">
                   {service.title}
                 </h3>
                 <p className="text-xs text-slate-400 font-medium mb-4">{service.subtitle}</p>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-800/60 flex items-center justify-between text-xs font-semibold text-slate-400 group-hover:text-blue-400 transition-colors">
+              <div className="mt-4 pt-3 border-t border-slate-800/60 flex items-center justify-between text-xs font-semibold text-slate-400 group-hover:text-cyan-400 transition-colors">
                 <span>Click to view full scope →</span>
-                <span className="bg-blue-600/20 text-blue-400 p-1.5 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-all">+</span>
+                <span className="bg-cyan-600/20 text-cyan-400 p-1.5 rounded-lg group-hover:bg-cyan-600 group-hover:text-white transition-all">+</span>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Interactive Service Detail Modal Popup */}
+      {/* Service Modal */}
       {selectedService && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
           <div className="bg-slate-900 border border-slate-700 max-w-2xl w-full p-8 rounded-3xl shadow-2xl relative max-h-[90vh] overflow-y-auto">
@@ -573,7 +555,7 @@ export default function Home() {
             <div className="flex items-center gap-3 mb-4">
               <span className="text-3xl p-3 bg-slate-950 rounded-2xl border border-slate-800">{selectedService.icon}</span>
               <div>
-                <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">{selectedService.category} • Pillar {selectedService.number}</span>
+                <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider">{selectedService.category} • Pillar {selectedService.number}</span>
                 <h3 className="text-2xl font-black text-white">{selectedService.title}</h3>
               </div>
             </div>
@@ -582,11 +564,11 @@ export default function Home() {
               {selectedService.subtitle}
             </p>
 
-            <h4 className="text-xs font-bold uppercase tracking-wider text-blue-400 mb-3">Comprehensive Compliance & Advisory Scope:</h4>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-cyan-400 mb-3">Comprehensive Compliance & Advisory Scope:</h4>
             <ul className="space-y-3 mb-8">
               {selectedService.details.map((detail: string, idx: number) => (
                 <li key={idx} className="text-slate-300 text-xs sm:text-sm flex items-start bg-slate-950/60 p-3 rounded-xl border border-slate-800">
-                  <span className="text-blue-400 mr-3 font-bold mt-0.5">▪</span>
+                  <span className="text-cyan-400 mr-3 font-bold mt-0.5">▪</span>
                   <span className="leading-relaxed">{detail}</span>
                 </li>
               ))}
@@ -599,7 +581,7 @@ export default function Home() {
                   playClickSound();
                   setSelectedService(null);
                 }}
-                className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 rounded-xl text-center text-sm shadow-lg shadow-blue-600/30 transition-all"
+                className="flex-1 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold py-3.5 rounded-xl text-center text-sm shadow-lg shadow-cyan-600/30 transition-all"
               >
                 Inquire About This Service
               </a>
@@ -617,18 +599,18 @@ export default function Home() {
         </div>
       )}
 
-      {/* Organization Heritage / Journey */}
+      {/* Heritage & Why Us Sections */}
       <section id="journey" className="py-24 px-6 lg:px-16 max-w-6xl mx-auto scroll-mt-24">
         <div className="text-center mb-16">
-          <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Our Heritage</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">The Evolution of {firmName}</h2>
+          <span className="text-cyan-400 font-semibold text-xs uppercase tracking-widest bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">Our Heritage</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">The Evolution of TriWise Partners</h2>
           <p className="text-slate-400 max-w-xl mx-auto text-sm">Founded on the bedrock of ethical practice, deep regulatory insight, and unwavering client advocacy.</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {milestones.map((item, index) => (
-            <div key={index} className="bg-slate-900/80 border border-slate-800 p-8 rounded-3xl relative group hover:border-blue-500/50 transition-all duration-300">
-              <span className="text-xs font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full uppercase">
+            <div key={index} className="bg-slate-900/80 border border-slate-800 p-8 rounded-3xl relative group hover:border-cyan-500/50 transition-all duration-300">
+              <span className="text-xs font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 rounded-full uppercase">
                 {item.year}
               </span>
               <h3 className="text-xl font-bold text-white mt-6 mb-3">{item.title}</h3>
@@ -638,37 +620,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Us / Credentials Section */}
-      <section id="credentials" className="py-24 px-6 lg:px-16 max-w-6xl mx-auto scroll-mt-24">
-        <div className="text-center mb-16">
-          <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Why Choose Us</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-4">Institutional Standards & Assurance</h2>
-          <p className="text-slate-400 max-w-xl mx-auto text-sm">Providing robust legal and fiscal defense backed by decades of collective advisory expertise.</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-slate-900 border border-slate-800 p-8 rounded-3xl">
-            <h3 className="text-xl font-bold text-white mb-3">🛡️ Uncompromising Confidentiality</h3>
-            <p className="text-slate-400 text-sm leading-relaxed">We maintain rigorous data privacy protocols, safeguarding corporate restructuring details, board discussions, and sensitive financial records.</p>
-          </div>
-          <div className="bg-slate-900 border border-slate-800 p-8 rounded-3xl">
-            <h3 className="text-xl font-bold text-white mb-3">⚡ Proactive Regulatory Counsel</h3>
-            <p className="text-slate-400 text-sm leading-relaxed">Anticipating regulatory changes under SEBI, MCA, and Income Tax frameworks to protect your enterprise from compliance liabilities.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact & Consultation Section */}
+      {/* Contact Section */}
       <section id="contact" className="py-24 px-6 lg:px-16 max-w-7xl mx-auto scroll-mt-24">
         <div className="text-center mb-16">
-          <span className="text-blue-400 font-semibold text-xs uppercase tracking-widest bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">Get In Touch</span>
+          <span className="text-cyan-400 font-semibold text-xs uppercase tracking-widest bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">Get In Touch</span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-white mt-4 mb-3">Contact Us</h2>
           <p className="text-slate-400 text-sm">Connect directly via our head office, phone line, or submit your requirement securely below.</p>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Left Column: Information Cards */}
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
               <div className="text-2xl p-3 bg-slate-950 rounded-xl border border-slate-800">📍</div>
@@ -683,9 +643,8 @@ export default function Home() {
               <div>
                 <h4 className="font-bold text-white text-sm mb-1">Direct Line</h4>
                 <p className="text-slate-400 text-xs">
-                  <a href={`tel:${companyPhone}`} onClick={playClickSound} className="text-blue-400 hover:underline">{companyPhone}</a>
+                  <a href={`tel:${companyPhone}`} onClick={playClickSound} className="text-cyan-400 hover:underline">{companyPhone}</a>
                 </p>
-                <p className="text-slate-500 text-[10px] mt-1">Mon – Fri: 9:00 AM – 7:00 PM IST</p>
               </div>
             </div>
 
@@ -694,53 +653,32 @@ export default function Home() {
               <div>
                 <h4 className="font-bold text-white text-sm mb-1">Official Email</h4>
                 <p className="text-slate-400 text-xs">
-                  <a href={`mailto:${companyEmail}`} onClick={playClickSound} className="text-blue-400 hover:underline">{companyEmail}</a>
+                  <a href={`mailto:${companyEmail}`} onClick={playClickSound} className="text-cyan-400 hover:underline">{companyEmail}</a>
                 </p>
-                <p className="text-slate-500 text-[10px] mt-1">Encrypted & Confidential Channels</p>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Secure Inquiry Form */}
           <div className="lg:col-span-7 bg-slate-900 border border-slate-800 p-8 sm:p-10 rounded-3xl shadow-2xl">
             <h3 className="text-xl font-bold text-white mb-2">Send a Secure Inquiry</h3>
             <p className="text-slate-400 text-xs mb-6">Our advisory team will review your requirements and respond within 24 hours.</p>
 
-            <form 
-              action="https://api.web3forms.com/submit" 
-              method="POST" 
-              className="space-y-5"
-            >
+            <form action="https://api.web3forms.com/submit" method="POST" className="space-y-5">
               <input type="hidden" name="apikey" value="b5d8ed86-5013-4854-9fe4-29efbc0e7343" />
 
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Full Name / Corporate Entity</label>
-                <input 
-                  type="text" 
-                  name="name"
-                  placeholder="Enter your name or organization" 
-                  className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                  required
-                />
+                <input type="text" name="name" placeholder="Enter your name or organization" className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm" required />
               </div>
 
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Official Email Address</label>
-                <input 
-                  type="email" 
-                  name="email"
-                  placeholder="you@company.com" 
-                  className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                  required
-                />
+                <input type="email" name="email" placeholder="you@company.com" className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm" required />
               </div>
 
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Practice Domain Required</label>
-                <select 
-                  name="service"
-                  className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                >
+                <select name="service" className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm">
                   {coreServices.map((s, idx) => (
                     <option key={idx} value={`${s.number} - ${s.title}`} className="bg-slate-900 text-white">
                       {s.number} - {s.title}
@@ -751,24 +689,14 @@ export default function Home() {
 
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Inquiry Details / Scope</label>
-                <textarea 
-                  name="message"
-                  rows={4} 
-                  placeholder="Briefly describe your requirements or consultation needs..." 
-                  className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                ></textarea>
+                <textarea name="message" rows={4} placeholder="Briefly describe your requirements or consultation needs..." className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm"></textarea>
               </div>
 
-              <button 
-                type="submit" 
-                onClick={playClickSound}
-                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-4 rounded-xl shadow-xl shadow-blue-600/35 transition-all text-sm"
-              >
+              <button type="submit" onClick={playClickSound} className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold py-4 rounded-xl shadow-xl shadow-cyan-600/35 transition-all text-sm">
                 Submit Confidential Inquiry Securely
               </button>
             </form>
           </div>
-
         </div>
       </section>
 
