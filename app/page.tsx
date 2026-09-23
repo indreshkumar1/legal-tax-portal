@@ -7,6 +7,7 @@ export default function Home() {
   const companyPhone = "+91 (987) 654-3210";
   const companyEmail = "legal@triwisepartners.com";
   const companyAddress = "Plot No. 803, Sector 38, Gurgaon – 122002, Haryana, India";
+  const companyMapsUrl = "https://maps.google.com/?q=Plot+No.+803,+Sector+38,+Gurgaon+122002,+Haryana,+India";
 
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedService, setSelectedService] = useState<any | null>(null);
@@ -632,9 +633,17 @@ export default function Home() {
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
               <div className="text-2xl p-3 bg-slate-950 rounded-xl border border-slate-800">📍</div>
-              <div>
+             <div>
                 <h4 className="font-bold text-white text-sm mb-1">Head Office</h4>
-                <p className="text-slate-400 text-xs leading-relaxed">{companyAddress}</p>
+                <a 
+                  href={companyMapsUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  onClick={playClickSound}
+                  className="text-slate-400 text-xs leading-relaxed hover:text-cyan-400 transition-colors block underline decoration-slate-700 hover:decoration-cyan-400"
+                >
+                  {companyAddress} (View on Google Maps ↗)
+                </a>
               </div>
             </div>
 
