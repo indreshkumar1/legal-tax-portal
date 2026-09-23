@@ -309,17 +309,15 @@ export default function Home() {
       </div>
 
       {/* Sticky Glassmorphism Navbar with Official Logo Integration */}
+      {/* Sticky Glassmorphism Navbar with Official Logo Integration */}
       <nav className="sticky top-0 z-50 bg-slate-950/85 backdrop-blur-md border-b border-slate-800 py-3.5 px-6 lg:px-16 flex justify-between items-center transition-all">
         <a href="#home" onClick={playClickSound} className="flex items-center gap-3.5 group">
-          {/* Logo Container with Dark Shield Glow */}
-          <div className="bg-white px-3 py-1.5 rounded-xl shadow-lg border border-slate-700 flex items-center justify-center group-hover:border-blue-500 transition-colors">
-            <Image 
+          {/* Logo Container */}
+          <div className="bg-white px-3 py-1.5 rounded-xl shadow-lg border border-slate-700 flex items-center justify-center">
+            <img 
               src="/logo.png" 
               alt="Triwise Partners Logo" 
-              width={130} 
-              height={38} 
-              className="object-contain h-8 w-auto"
-              priority
+              className="h-8 w-auto object-contain"
             />
           </div>
           <div className="hidden sm:block border-l border-slate-800 pl-3.5">
