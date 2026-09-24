@@ -55,16 +55,17 @@ export default function AIChatWidget() {
         let newX = dragRef.current.initialX + dx;
         let newY = dragRef.current.initialY + dy;
 
-        // BOUNDARY CLAMPING: Prevent dragging off-screen so header & close button are never cut off
-        const maxThresholdX = window.innerWidth - 100;
-        const maxThresholdY = window.innerHeight - 100;
-        
-        if (newX < -window.innerWidth + 150) newX = -window.innerWidth + 150;
-        if (newX > maxThresholdX) newX = maxThresholdX;
-        
-        // Prevent dragging above the top viewport (keeps header safe)
-        if (newY < -window.innerHeight + 120) newY = -window.innerHeight + 120;
-        if (newY > maxThresholdY) newY = maxThresholdY;
+        // STRICT SCREEN BOUNDARY CLAMPING (Gaming HUD style containment)
+        const padding = 20;
+        const maxX = window.innerWidth - 80 - padding;
+        const maxY = window.innerHeight - 80 - padding;
+        const minX = -window.innerWidth + 100;
+        const minY = -window.innerHeight + 100;
+
+        if (newX < minX) newX = minX;
+        if (newX > maxX) newX = maxX;
+        if (newY < minY) newY = minY;
+        if (newY > maxY) newY = maxY;
 
         setPosition({ x: newX, y: newY });
       }
@@ -160,9 +161,9 @@ export default function AIChatWidget() {
           ref={buttonRef}
           onMouseDown={handleIconMouseDown}
           onClick={() => setIsOpen(true)}
-          className={`relative overflow-hidden w-14 h-14 rounded-full shadow-2xl flex items-center justify-center border transition-all duration-300 cursor-grab active:cursor-grabbing hover:scale-110 ${
+          className={`relative overflow-hidden w-14 h-14 rounded-full shadow-2xl flex items-center justify-center border transition-all duration-300 cursor-grab active:cursor-grabbing hover:scale-110 animate-bounce [animation-duration:3s] ${
             isHoveredNear 
-              ? 'bg-gradient-to-tr from-violet-600 via-fuchsia-500 to-cyan-400 border-cyan-200 shadow-fuchsia-500/50 animate-pulse' 
+              ? 'bg-gradient-to-tr from-violet-600 via-fuchsia-500 to-cyan-400 border-cyan-200 shadow-fuchsia-500/50' 
               : 'bg-slate-900/90 backdrop-blur-md border-cyan-500/40 shadow-cyan-500/30'
           }`}
           title="Drag anywhere or Click to open AI Assistant"
@@ -180,7 +181,7 @@ export default function AIChatWidget() {
         </button>
       ) : (
         <div className="bg-slate-900 border border-slate-700 w-[90vw] sm:w-[400px] h-[500px] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-fadeIn">
-          {/* Draggable Chat Header with boundary protection */}
+          {/* Draggable Chat Header */}
           <div 
             onMouseDown={handleHeaderMouseDown}
             className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-4 border-b border-slate-800 flex justify-between items-center cursor-grab active:cursor-grabbing select-none"
