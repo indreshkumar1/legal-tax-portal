@@ -18,7 +18,7 @@ export default function AIChatWidget() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHoveredNear, setIsHoveredNear] = useState(false);
 
-  // Physics & Position States (Using absolute pixel offsets from bottom-right origin)
+  // Position States
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   
@@ -32,7 +32,7 @@ export default function AIChatWidget() {
     time: 0,
   });
 
-  // Physics animation frame for wall bouncing and momentum
+  // Physics animation frame for wall bouncing (only when closed)
   useEffect(() => {
     let animationFrameId: number;
 
@@ -45,20 +45,17 @@ export default function AIChatWidget() {
           x += vx;
           y += vy;
 
-          // Viewport boundaries relative to bottom-right (right: 24, bottom: 24)
           const maxRight = window.innerWidth - 80;
           const maxBottom = window.innerHeight - 80;
           
-          // Bounce off left/right walls
           if (x < -maxRight + 40) {
             x = -maxRight + 40;
-            vx = -vx * 0.7; // bounce damping
+            vx = -vx * 0.7;
           } else if (x > 0) {
             x = 0;
             vx = -vx * 0.7;
           }
 
-          // Bounce off top/bottom walls
           if (y < -maxBottom + 40) {
             y = -maxBottom + 40;
             vy = -vy * 0.7;
@@ -67,7 +64,6 @@ export default function AIChatWidget() {
             vy = -vy * 0.7;
           }
 
-          // Friction / deceleration
           vx *= 0.93;
           vy *= 0.93;
 
@@ -83,7 +79,7 @@ export default function AIChatWidget() {
     return () => cancelAnimationFrame(animationFrameId);
   }, [isDragging, isOpen]);
 
-  // Track mouse proximity and dragging
+  // Track mouse proximity and dragging with strict boundary clamping
   useEffect(() => {
     const handleGlobalMouseMove = (e: MouseEvent) => {
       if (buttonRef.current && !isOpen) {
@@ -101,12 +97,28 @@ export default function AIChatWidget() {
       }
 
       if (isDragging) {
-        // Dragging inverted because element is pinned bottom-right (CSS right/bottom)
         const dx = e.clientX - dragRef.current.startX;
         const dy = e.clientY - dragRef.current.startY;
         
-        const newX = dragRef.current.initialX + dx;
-        const newY = dragRef.current.initialY + dy;
+        let newX = dragRef.current.initialX + dx;
+        let newY = dragRef.current.initialY + dy;
+
+        if (isOpen) {
+          // STRICT BOUNDARY CLAMPING WHEN OPEN: 
+          // Ensures the chat window can NEVER leave the viewport or hide the close button.
+          const chatWidth = Math.min(400, window.innerWidth * 0.9);
+          const chatHeight = 500;
+          
+          const minAllowedX = -window.innerWidth + chatWidth + 24;
+          const maxAllowedX = -24;
+          const minAllowedY = -window.innerHeight + chatHeight + 24; // Keeps header fully visible at top!
+          const maxAllowedY = -24;
+
+          if (newX < minAllowedX) newX = minAllowedX;
+          if (newX > maxAllowedX) newX = maxAllowedX;
+          if (newY < minAllowedY) newY = minAllowedY;
+          if (newY > maxAllowedY) newY = maxAllowedY;
+        }
 
         posRef.current = { x: newX, y: newY };
         setOffset({ x: newX, y: newY });
@@ -116,15 +128,16 @@ export default function AIChatWidget() {
     const handleMouseUp = (e: MouseEvent) => {
       if (isDragging) {
         setIsDragging(false);
-        const dt = (Date.now() - dragRef.current.time) / 1000 || 0.016;
-        const dx = e.clientX - dragRef.current.startX;
-        const dy = e.clientY - dragRef.current.startY;
-        
-        // Give it throwing momentum when released
-        velocityRef.current = {
-          vx: (dx / dt) * 0.2,
-          vy: (dy / dt) * 0.2,
-        };
+        if (!isOpen) {
+          const dt = (Date.now() - dragRef.current.time) / 1000 || 0.016;
+          const dx = e.clientX - dragRef.current.startX;
+          const dy = e.clientY - dragRef.current.startY;
+          
+          velocityRef.current = {
+            vx: (dx / dt) * 0.2,
+            vy: (dy / dt) * 0.2,
+          };
+        }
       }
     };
 
@@ -156,8 +169,16 @@ export default function AIChatWidget() {
   useEffect(() => {
     if (isOpen) {
       scrollToBottom();
+      
+      // Safety check on open: if the window was left in a position that clips the top, snap it down safely
+      const chatHeight = 500;
+      const minAllowedY = -window.innerHeight + chatHeight + 24;
+      if (posRef.current.y < minAllowedY) {
+        posRef.current.y = minAllowedY;
+        setOffset({ ...posRef.current });
+      }
     }
-  }, [messages, isOpen]);
+  }, [isOpen]);
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -204,10 +225,7 @@ export default function AIChatWidget() {
         <button
           ref={buttonRef}
           onMouseDown={handleMouseDown}
-          onClick={() => {
-            // Open chat window if not dragged significantly
-            setIsOpen(true);
-          }}
+          onClick={() => setIsOpen(true)}
           className={`relative overflow-hidden w-14 h-14 rounded-full shadow-2xl flex items-center justify-center border transition-all duration-300 cursor-grab active:cursor-grabbing hover:scale-110 ${
             isHoveredNear 
               ? 'bg-gradient-to-tr from-violet-600 via-fuchsia-500 to-cyan-400 border-cyan-200 shadow-fuchsia-500/50' 
@@ -228,7 +246,7 @@ export default function AIChatWidget() {
         </button>
       ) : (
         <div className="bg-slate-900 border border-slate-700 w-[90vw] sm:w-[400px] h-[500px] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-fadeIn">
-          {/* Draggable Header */}
+          {/* Draggable Header with strict screen boundary clamping */}
           <div 
             onMouseDown={handleMouseDown}
             className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-4 border-b border-slate-800 flex justify-between items-center cursor-grab active:cursor-grabbing select-none"
@@ -239,7 +257,7 @@ export default function AIChatWidget() {
               <div>
                 <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
                   ✨ TriWise AI Advisor 
-                  <span className="text-[9px] text-slate-400 font-normal">(Pinball Physics)</span>
+                  <span className="text-[9px] text-slate-400 font-normal">(Safe HUD)</span>
                 </h4>
                 <p className="text-[10px] text-cyan-400">MCA, SEBI & Legal Knowledge Engine</p>
               </div>
@@ -247,7 +265,6 @@ export default function AIChatWidget() {
             <button
               onClick={() => {
                 setIsOpen(false);
-                // Snap back to home position on close so it's never lost
                 posRef.current = { x: 0, y: 0 };
                 setOffset({ x: 0, y: 0 });
               }}
