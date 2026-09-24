@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import AIChatWidget from "@/components/AIChatWidget"; // <-- 1. ADD THIS IMPORT AT THE TOP
 export const metadata: Metadata = {
   title: "TriWise Partners | Govern | Grow | Lead",
   description: "Premier multi-disciplinary legal, secretarial, and taxation advisory firm specializing in NCLT, SEBI compliance, and corporate structuring.",
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <AIChatWidget/>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
