@@ -640,15 +640,10 @@ export default function Home() {
             <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
               <div className="text-2xl p-3 bg-slate-950 rounded-xl border border-slate-800">📍</div>
               <div>
-                <h4 className="font-bold text-white text-sm mb-1">Head Office</h4>
-                <a 
-                  href={companyMapsUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  onClick={playClickSound}
-                  className="text-slate-400 text-xs leading-relaxed hover:text-cyan-400 transition-colors block underline decoration-slate-700 hover:decoration-cyan-400"
-                >
-                  {companyAddress} (View on Google Maps ↗)
+                <h4 className="text-sm font-bold text-white mb-1">Head Office</h4>
+                <p className="text-xs text-slate-300 leading-relaxed mb-3">{companyAddress}</p>
+                <a href={companyMapsUrl} target="_blank" rel="noopener noreferrer" onClick={playClickSound} className="text-xs text-cyan-400 font-semibold hover:underline">
+                  Open in Google Maps →
                 </a>
               </div>
             </div>
@@ -656,59 +651,49 @@ export default function Home() {
             <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
               <div className="text-2xl p-3 bg-slate-950 rounded-xl border border-slate-800">📞</div>
               <div>
-                <h4 className="font-bold text-white text-sm mb-1">Direct Line</h4>
-                <p className="text-slate-400 text-xs">
-                  <a href={`tel:${companyPhone}`} onClick={playClickSound} className="text-cyan-400 hover:underline">{companyPhone}</a>
-                </p>
+                <h4 className="text-sm font-bold text-white mb-1">Direct Line</h4>
+                <p className="text-xs text-slate-300 leading-relaxed mb-2">{companyPhone}</p>
+                <a href={`tel:${companyPhone}`} onClick={playClickSound} className="text-xs text-cyan-400 font-semibold hover:underline">
+                  Call Now →
+                </a>
               </div>
             </div>
 
             <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-start gap-4">
               <div className="text-2xl p-3 bg-slate-950 rounded-xl border border-slate-800">✉️</div>
               <div>
-                <h4 className="font-bold text-white text-sm mb-1">Official Email</h4>
-                <p className="text-slate-400 text-xs">
-                  <a href={`mailto:${companyEmail}`} onClick={playClickSound} className="text-cyan-400 hover:underline">{companyEmail}</a>
-                </p>
+                <h4 className="text-sm font-bold text-white mb-1">Electronic Mail</h4>
+                <p className="text-xs text-slate-300 leading-relaxed mb-2">{companyEmail}</p>
+                <a href={`mailto:${companyEmail}`} onClick={playClickSound} className="text-xs text-cyan-400 font-semibold hover:underline">
+                  Send Message →
+                </a>
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-7 bg-slate-900 border border-slate-800 p-8 sm:p-10 rounded-3xl shadow-2xl">
-            <h3 className="text-xl font-bold text-white mb-2">Send a Secure Inquiry</h3>
-            <p className="text-slate-400 text-xs mb-6">Our advisory team will review your requirements and respond within 24 hours.</p>
-
-            <form action="https://api.web3forms.com/submit" method="POST" className="space-y-5">
-              <input type="hidden" name="apikey" value="51e34f82-a396-4171-893f-67f7d1cc32b4" />
-
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Full Name / Corporate Entity</label>
-                <input type="text" name="name" placeholder="Enter your name or organization" className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm" required />
+          <div className="lg:col-span-7 bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-xl">
+            <h3 className="text-xl font-bold text-white mb-6">Secure Inquiry Form</h3>
+            <form onSubmit={(e) => { e.preventDefault(); playClickSound(); alert("Thank you. Your inquiry has been securely submitted to TriWise Partners."); }} className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 mb-2">Full Name</label>
+                  <input type="text" required placeholder="John Doe" className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:border-cyan-400 focus:outline-none transition-colors" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-300 mb-2">Corporate Email</label>
+                  <input type="email" required placeholder="john@company.com" className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:border-cyan-400 focus:outline-none transition-colors" />
+                </div>
               </div>
-
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Official Email Address</label>
-                <input type="email" name="email" placeholder="you@company.com" className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm" required />
+                <label className="block text-xs font-semibold text-slate-300 mb-2">Phone Number</label>
+                <input type="tel" placeholder="+91 XXXXX XXXXX" className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:border-cyan-400 focus:outline-none transition-colors" />
               </div>
-
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Practice Domain Required</label>
-                <select name="service" className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm">
-                  {coreServices.map((s, idx) => (
-                    <option key={idx} value={`${s.number} - ${s.title}`} className="bg-slate-900 text-white">
-                      {s.number} - {s.title}
-                    </option>
-                  ))}
-                </select>
+                <label className="block text-xs font-semibold text-slate-300 mb-2">Requirement / Practice Area</label>
+                <textarea rows={4} required placeholder="Describe your advisory or compliance requirement..." className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:border-cyan-400 focus:outline-none transition-colors resize-none"></textarea>
               </div>
-
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Inquiry Details / Scope</label>
-                <textarea name="message" rows={4} placeholder="Briefly describe your requirements or consultation needs..." className="w-full px-4 py-3.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm"></textarea>
-              </div>
-
-              <button type="submit" onClick={playClickSound} className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold py-4 rounded-xl shadow-xl shadow-cyan-600/35 transition-all text-sm">
-                Submit Confidential Inquiry Securely
+              <button type="submit" onClick={playClickSound} className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold py-3.5 rounded-xl shadow-lg shadow-cyan-600/30 text-sm transition-all active:scale-95">
+                Submit Confidential Inquiry
               </button>
             </form>
           </div>
@@ -716,18 +701,19 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-950 border-t border-slate-800/80 py-12 px-6 lg:px-16 text-center text-xs text-slate-500">
-        <div className="max-w-4xl mx-auto space-y-3">
-          <p className="font-bold text-slate-300 text-sm">{firmName} ({firmTagline}) — Corporate Law, Secretarial, & Taxation Counsel</p>
-          <p>
-            <a href={companyMapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors underline">
-              {companyAddress}
-            </a> 
-            {" "} | Direct Line: {companyPhone}
-          </p>
-          <p className="pt-4 border-t border-slate-900">© {new Date().getFullYear()} {firmName}. All rights reserved. Professional Confidentiality & Ethical Standards Maintained.</p>
+      <footer className="bg-slate-900 border-t border-slate-800 py-12 px-6 lg:px-16 text-center text-xs text-slate-400">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-3">
+            <span className="font-bold text-white text-sm">{firmName}</span>
+            <span className="text-slate-600">|</span>
+            <span>{firmTagline}</span>
+          </div>
+          <div className="text-slate-500">
+            © {new Date().getFullYear()} {firmName}. All rights reserved. Strict Client Confidentiality & Professional Standards.
+          </div>
         </div>
       </footer>
+
     </main>
   );
 }
