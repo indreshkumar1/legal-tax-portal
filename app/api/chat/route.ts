@@ -7,7 +7,11 @@ export async function POST(req: Request) {
 
     if (!apiKey) {
       return NextResponse.json(
+<<<<<<< HEAD
         { reply: 'Configuration Error: GEMINI_API_KEY is missing from environment variables.' },
+=======
+        { reply: 'Configuration Error: GEMINI_API_KEY is missing from .env.local' },
+>>>>>>> bc11b9a0e7b6e6e571d96867e7f6ab494a1ceb0b
         { status: 500 }
       );
     }
