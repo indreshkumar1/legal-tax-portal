@@ -6,12 +6,58 @@ export default function AIChatWidget() {
   const [messages, setMessages] = useState([
     { 
       role: 'assistant', 
-      content: 'Hello! I am the TriWise Partners Regulatory Assistant. Ask me anything regarding MCA compliance, Company Law, SEBI frameworks, or our 17 practice pillars.' 
+      content: 'Hello! I am the TriWise Partners Regulatory Assistant. Ask me anything regarding MCA compliance, Company Law, SEBI frameworks, or our practice pillars.' 
     }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Dragging states
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragRef = useRef<{ startX: number; startY: number; initialX: number; initialY: number }>({
+    startX: 0,
+    startY: 0,
+    initialX: 0,
+    initialY: 0,
+  });
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    // Only drag if clicking the header bar
+    setIsDragging(true);
+    dragRef.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      initialX: position.x,
+      initialY: position.y,
+    };
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return;
+      const dx = e.clientX - dragRef.current.startX;
+      const dy = e.clientY - dragRef.current.startY;
+      setPosition({
+        x: dragRef.current.initialX + dx,
+        y: dragRef.current.initialY + dy,
+      });
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    if (isDragging) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    }
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -33,7 +79,6 @@ export default function AIChatWidget() {
     setLoading(true);
 
     try {
-      // Call your backend API route that connects to your AI provider (e.g., Gemini or OpenAI)
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -57,29 +102,44 @@ export default function AIChatWidget() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-sans">
+    <div 
+      className="fixed z-50 font-sans"
+      style={{
+        bottom: isOpen ? 'auto' : '24px',
+        right: isOpen ? 'auto' : '24px',
+        transform: isOpen ? `translate(${position.x}px, ${position.y}px)` : 'none',
+        transition: isDragging ? 'none' : 'transform 0.05s ease-out',
+      }}
+    >
       {!isOpen ? (
         <button
           onClick={() => setIsOpen(true)}
-          className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white p-4 rounded-full shadow-2xl shadow-cyan-500/30 flex items-center gap-3 border border-cyan-400/30 transition-all hover:scale-105 group"
+          className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white p-4 rounded-full shadow-2xl shadow-cyan-500/30 flex items-center gap-3 border border-cyan-400/30 transition-all hover:scale-105 group cursor-pointer"
         >
           <span className="text-xl">🤖</span>
           <span className="text-xs font-bold tracking-wide pr-1 hidden sm:inline">Ask AI Regulatory Expert</span>
         </button>
       ) : (
         <div className="bg-slate-900 border border-slate-700 w-[90vw] sm:w-[400px] h-[500px] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-fadeIn">
-          {/* Chat Header */}
-          <div className="bg-slate-950 p-4 border-b border-slate-800 flex justify-between items-center">
+          {/* Draggable Chat Header */}
+          <div 
+            onMouseDown={handleMouseDown}
+            className="bg-slate-950 p-4 border-b border-slate-800 flex justify-between items-center cursor-grab active:cursor-grabbing select-none"
+            title="Click and drag to move window"
+          >
             <div className="flex items-center gap-2.5">
               <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
               <div>
-                <h4 className="text-xs font-bold text-white">TriWise AI Compliance Advisor</h4>
+                <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
+                  TriWise AI Compliance Advisor 
+                  <span className="text-[9px] text-slate-500 font-normal">(Drag Header)</span>
+                </h4>
                 <p className="text-[10px] text-slate-400">Powered by MCA & Legal Knowledge</p>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center font-bold text-sm transition-colors"
+              className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center font-bold text-sm transition-colors cursor-pointer"
             >
               ✕
             </button>
@@ -127,7 +187,7 @@ export default function AIChatWidget() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-cyan-600 hover:bg-cyan-500 disabled:opacity-50 text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition-colors"
+              className="bg-cyan-600 hover:bg-cyan-500 disabled:opacity-50 text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
             >
               Send
             </button>
