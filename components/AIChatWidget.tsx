@@ -18,7 +18,7 @@ export default function AIChatWidget() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHoveredNear, setIsHoveredNear] = useState(false);
 
-  // Dragging states (allows moving anywhere on the screen)
+  // Dragging states
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const dragRef = useRef<{ startX: number; startY: number; initialX: number; initialY: number }>({
@@ -51,10 +51,22 @@ export default function AIChatWidget() {
       if (isDragging) {
         const dx = e.clientX - dragRef.current.startX;
         const dy = e.clientY - dragRef.current.startY;
-        setPosition({
-          x: dragRef.current.initialX + dx,
-          y: dragRef.current.initialY + dy,
-        });
+        
+        let newX = dragRef.current.initialX + dx;
+        let newY = dragRef.current.initialY + dy;
+
+        // BOUNDARY CLAMPING: Prevent dragging off-screen so header & close button are never cut off
+        const maxThresholdX = window.innerWidth - 100;
+        const maxThresholdY = window.innerHeight - 100;
+        
+        if (newX < -window.innerWidth + 150) newX = -window.innerWidth + 150;
+        if (newX > maxThresholdX) newX = maxThresholdX;
+        
+        // Prevent dragging above the top viewport (keeps header safe)
+        if (newY < -window.innerHeight + 120) newY = -window.innerHeight + 120;
+        if (newY > maxThresholdY) newY = maxThresholdY;
+
+        setPosition({ x: newX, y: newY });
       }
     };
 
@@ -71,7 +83,6 @@ export default function AIChatWidget() {
     };
   }, [isDragging, isOpen]);
 
-  // Allow dragging the icon itself when closed
   const handleIconMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
     dragRef.current = {
@@ -138,8 +149,8 @@ export default function AIChatWidget() {
     <div 
       className="fixed z-50 font-sans"
       style={{
-        bottom: isOpen ? 'auto' : '24px',
-        right: isOpen ? 'auto' : '24px',
+        bottom: '24px',
+        right: '24px',
         transform: `translate(${position.x}px, ${position.y}px)`,
         transition: isDragging ? 'none' : 'transform 0.05s ease-out',
       }}
@@ -148,10 +159,7 @@ export default function AIChatWidget() {
         <button
           ref={buttonRef}
           onMouseDown={handleIconMouseDown}
-          onClick={() => {
-            // Only trigger open if it wasn't a drag motion
-            setIsOpen(true);
-          }}
+          onClick={() => setIsOpen(true)}
           className={`relative overflow-hidden w-14 h-14 rounded-full shadow-2xl flex items-center justify-center border transition-all duration-300 cursor-grab active:cursor-grabbing hover:scale-110 ${
             isHoveredNear 
               ? 'bg-gradient-to-tr from-violet-600 via-fuchsia-500 to-cyan-400 border-cyan-200 shadow-fuchsia-500/50 animate-pulse' 
@@ -159,7 +167,6 @@ export default function AIChatWidget() {
           }`}
           title="Drag anywhere or Click to open AI Assistant"
         >
-          {/* Magical Spotlight Tracker */}
           {isHoveredNear && (
             <span 
               className="absolute w-24 h-24 rounded-full bg-white/30 blur-md pointer-events-none transition-all duration-75"
@@ -169,12 +176,11 @@ export default function AIChatWidget() {
               }}
             />
           )}
-
           <span className="text-2xl relative z-10 filter drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">🤖✨</span>
         </button>
       ) : (
         <div className="bg-slate-900 border border-slate-700 w-[90vw] sm:w-[400px] h-[500px] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-fadeIn">
-          {/* Draggable Chat Header */}
+          {/* Draggable Chat Header with boundary protection */}
           <div 
             onMouseDown={handleHeaderMouseDown}
             className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-4 border-b border-slate-800 flex justify-between items-center cursor-grab active:cursor-grabbing select-none"
