@@ -4,32 +4,76 @@ export async function POST(req: Request) {
   try {
     const { message } = await req.json();
 
-    const systemPrompt = `You are an expert AI Legal, Secretarial, and Financial Regulatory Assistant for "TriWise Partners", a premier multi-disciplinary firm based in India. 
-    Your expertise covers:
-    - Ministry of Corporate Affairs (MCA) and Companies Act, 2013 filings, board meetings, and compliance.
-    - SEBI (LODR, ICDR, SAST, PIT) regulations for listed entities and capital markets.
-    - NCLT litigation, mergers, amalgamations, and oppression & mismanagement (Sections 241-242).
-    - Taxation (Income Tax, GST) and FEMA/RBI cross-border regulations.
-    
-    Keep answers concise, professional, accurate to Indian corporate law, and helpful. Always remind users to consult TriWise Partners directly for formal advisory or representation.`;
-
-    // Smart simulation response handling for various Indian regulatory keywords
-    let reply = `Thank you for your query regarding "${message}". Under Indian Corporate Law and MCA/SEBI frameworks, this requires careful structuring. For bespoke guidance tailored to your enterprise, please connect with our specialists at TriWise Partners via our contact form or call us directly.`;
-
-    const lowerMessage = message.toLowerCase();
-
-    if (lowerMessage.includes('nclt') || lowerMessage.includes('merger') || lowerMessage.includes('amalgamation')) {
-      reply = `Under Sections 230–232 of the Companies Act, 2013, mergers, demergers, and amalgamations require systematic structuring, NCLT scheme approvals, and creditor/shareholder meetings. TriWise Partners provides comprehensive end-to-end NCLT representation and corporate restructuring support.`;
-    } else if (lowerMessage.includes('sebi') || lowerMessage.includes('listing') || lowerMessage.includes('lodr')) {
-      reply = `SEBI compliance involves continuous LODR disclosures, ICDR capital issuances, Takeover (SAST) codes, and Insider Trading (PIT) regulations. TriWise Partners assists listed entities and boards with robust regulatory governance and Secretarial Audits.`;
-    } else if (lowerMessage.includes('fema') || lowerMessage.includes('rbi') || lowerMessage.includes('fdi')) {
-      reply = `FDI structuring, cross-border remittances, and RBI filings are governed strictly under the Foreign Exchange Management Act (FEMA). Our advisory team handles comprehensive regulatory compliance for international transactions.`;
-    } else if (lowerMessage.includes('mca') || lowerMessage.includes('company incorporation') || lowerMessage.includes('filing')) {
-      reply = `MCA compliance under the Companies Act, 2013 involves timely ROC filings, maintaining statutory registers, conducting board/AGM meetings, and event-based disclosures (DIR-12, AOC-4, MGT-7). TriWise Partners handles full-spectrum corporate secretarial workflows.`;
+    if (!message) {
+      return NextResponse.json({ reply: 'Please provide a query.' }, { status: 400 });
     }
 
-    return NextResponse.json({ reply });
+    let externalData = '';
+    const lowerMessage = message.toLowerCase();
+
+    // 1. Check if the query is technical/coding-related to fetch from GitHub API
+    const isCodeOrRepoQuery = /code|github|script|python|repository|error|api|bug|linux/i.test(message);
+
+    if (isCodeOrRepoQuery) {
+      try {
+        // Query GitHub public repositories/code search API
+        const githubQuery = encodeURIComponent(message);
+        const ghRes = await fetch(`https://api.github.com/search/repositories?q=${githubQuery}&per_page=3`, {
+          headers: {
+            'User-Agent': 'TriWise-Partners-AI-Bot',
+            // Optional: If you have a GitHub token, add it here for higher rate limits:
+            // 'Authorization': `Bearer ${process.env.GITHUB_TOKEN}`
+          }
+        });
+        
+        if (ghRes.ok) {
+          const ghData = await ghRes.json();
+          if (ghData.items && ghData.items.length > 0) {
+            const topRepos = ghData.items.map((repo: any) => `- [${repo.full_name}](${repo.html_url}): ${repo.description || 'No description'}`).join('\n');
+            externalData += `\n\n**Top GitHub References Found:**\n${topRepos}`;
+          }
+        }
+      } catch (ghErr) {
+        console.error('GitHub API fetch error:', ghErr);
+      }
+    } 
+
+    // 2. Fetch live web info via Google Custom Search API (for general knowledge, SEBI, MCA, NCLT, etc.)
+    const googleApiKey = process.env.GOOGLE_SEARCH_API_KEY;
+    const searchEngineId = process.env.GOOGLE_CSE_ID;
+
+    if (googleApiKey && searchEngineId) {
+      try {
+        const googleRes = await fetch(`https://www.googleapis.com/customsearch/v1?key=${googleApiKey}&cx=${searchEngineId}&q=${encodeURIComponent(message)}`);
+        if (googleRes.ok) {
+          const googleData = await googleRes.json();
+          if (googleData.items && googleData.items.length > 0) {
+            const topResults = googleData.items.slice(0, 3).map((item: any) => `- [${item.title}](${item.link}): ${item.snippet}`).join('\n');
+            externalData += `\n\n**Trusted Global Web Results (Google):**\n${topResults}`;
+          }
+        }
+      } catch (gErr) {
+        console.error('Google Search API error:', gErr);
+      }
+    }
+
+    // 3. Construct the comprehensive response
+    // (If you use an LLM like Gemini SDK on the backend, you can pass `externalData` as context to the model here).
+    let botReply = `Here is what I found regarding "${message}":`;
+    
+    if (externalData) {
+      botReply += externalData;
+    } else {
+      botReply += `\n\nI searched trusted public databases and global web archives, but found no direct matches. Please feel free to rephrase or connect with TriWise Partners directly via our contact form for specialized advisory.`;
+    }
+
+    return NextResponse.json({ reply: botReply });
+
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });
+    console.error('Chat API Error:', error);
+    return NextResponse.json(
+      { reply: 'Sorry, I encountered an error connecting to global trusted search streams.' },
+      { status: 500 }
+    );
   }
 }
