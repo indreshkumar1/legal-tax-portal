@@ -13,7 +13,12 @@ export default function AIChatWidget() {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Dragging states
+  // Mouse proximity and glow tracking for magical effect
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHoveredNear, setIsHoveredNear] = useState(false);
+
+  // Dragging states (allows moving anywhere on the screen)
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const dragRef = useRef<{ startX: number; startY: number; initialX: number; initialY: number }>({
@@ -23,8 +28,51 @@ export default function AIChatWidget() {
     initialY: 0,
   });
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    // Only drag if clicking the header bar
+  useEffect(() => {
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      if (buttonRef.current && !isOpen) {
+        const rect = buttonRef.current.getBoundingClientRect();
+        const buttonCenterX = rect.left + rect.width / 2;
+        const buttonCenterY = rect.top + rect.height / 2;
+        
+        const distance = Math.hypot(e.clientX - buttonCenterX, e.clientY - buttonCenterY);
+        
+        if (distance < 140) {
+          setIsHoveredNear(true);
+          setMousePos({
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+          });
+        } else {
+          setIsHoveredNear(false);
+        }
+      }
+
+      if (isDragging) {
+        const dx = e.clientX - dragRef.current.startX;
+        const dy = e.clientY - dragRef.current.startY;
+        setPosition({
+          x: dragRef.current.initialX + dx,
+          y: dragRef.current.initialY + dy,
+        });
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    window.addEventListener('mousemove', handleGlobalMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      window.removeEventListener('mousemove', handleGlobalMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, isOpen]);
+
+  // Allow dragging the icon itself when closed
+  const handleIconMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
     dragRef.current = {
       startX: e.clientX,
@@ -34,30 +82,15 @@ export default function AIChatWidget() {
     };
   };
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
-      const dx = e.clientX - dragRef.current.startX;
-      const dy = e.clientY - dragRef.current.startY;
-      setPosition({
-        x: dragRef.current.initialX + dx,
-        y: dragRef.current.initialY + dy,
-      });
+  const handleHeaderMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    dragRef.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      initialX: position.x,
+      initialY: position.y,
     };
-
-    const handleMouseUp = () => {
-      setIsDragging(false);
-    };
-
-    if (isDragging) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
-    }
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [isDragging]);
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -107,34 +140,54 @@ export default function AIChatWidget() {
       style={{
         bottom: isOpen ? 'auto' : '24px',
         right: isOpen ? 'auto' : '24px',
-        transform: isOpen ? `translate(${position.x}px, ${position.y}px)` : 'none',
+        transform: `translate(${position.x}px, ${position.y}px)`,
         transition: isDragging ? 'none' : 'transform 0.05s ease-out',
       }}
     >
       {!isOpen ? (
         <button
-          onClick={() => setIsOpen(true)}
-          className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white p-4 rounded-full shadow-2xl shadow-cyan-500/30 flex items-center gap-3 border border-cyan-400/30 transition-all hover:scale-105 group cursor-pointer"
+          ref={buttonRef}
+          onMouseDown={handleIconMouseDown}
+          onClick={() => {
+            // Only trigger open if it wasn't a drag motion
+            setIsOpen(true);
+          }}
+          className={`relative overflow-hidden w-14 h-14 rounded-full shadow-2xl flex items-center justify-center border transition-all duration-300 cursor-grab active:cursor-grabbing hover:scale-110 ${
+            isHoveredNear 
+              ? 'bg-gradient-to-tr from-violet-600 via-fuchsia-500 to-cyan-400 border-cyan-200 shadow-fuchsia-500/50 animate-pulse' 
+              : 'bg-slate-900/90 backdrop-blur-md border-cyan-500/40 shadow-cyan-500/30'
+          }`}
+          title="Drag anywhere or Click to open AI Assistant"
         >
-          <span className="text-xl">🤖</span>
-          <span className="text-xs font-bold tracking-wide pr-1 hidden sm:inline">Ask AI Regulatory Expert</span>
+          {/* Magical Spotlight Tracker */}
+          {isHoveredNear && (
+            <span 
+              className="absolute w-24 h-24 rounded-full bg-white/30 blur-md pointer-events-none transition-all duration-75"
+              style={{
+                top: `${mousePos.y - 48}px`,
+                left: `${mousePos.x - 48}px`,
+              }}
+            />
+          )}
+
+          <span className="text-2xl relative z-10 filter drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]">🤖✨</span>
         </button>
       ) : (
         <div className="bg-slate-900 border border-slate-700 w-[90vw] sm:w-[400px] h-[500px] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-fadeIn">
           {/* Draggable Chat Header */}
           <div 
-            onMouseDown={handleMouseDown}
-            className="bg-slate-950 p-4 border-b border-slate-800 flex justify-between items-center cursor-grab active:cursor-grabbing select-none"
+            onMouseDown={handleHeaderMouseDown}
+            className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-4 border-b border-slate-800 flex justify-between items-center cursor-grab active:cursor-grabbing select-none"
             title="Click and drag to move window"
           >
             <div className="flex items-center gap-2.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-fuchsia-400 animate-ping"></span>
               <div>
                 <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
-                  TriWise AI Compliance Advisor 
-                  <span className="text-[9px] text-slate-500 font-normal">(Drag Header)</span>
+                  ✨ TriWise AI Advisor 
+                  <span className="text-[9px] text-slate-400 font-normal">(Drag Header)</span>
                 </h4>
-                <p className="text-[10px] text-slate-400">Powered by MCA & Legal Knowledge</p>
+                <p className="text-[10px] text-cyan-400">MCA, SEBI & Legal Knowledge Engine</p>
               </div>
             </div>
             <button
@@ -155,8 +208,8 @@ export default function AIChatWidget() {
                 <div
                   className={`max-w-[85%] p-3.5 rounded-2xl text-xs leading-relaxed ${
                     msg.role === 'user'
-                      ? 'bg-cyan-600 text-white rounded-br-none shadow-md'
-                      : 'bg-slate-800 text-slate-200 rounded-bl-none border border-slate-700'
+                      ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-br-none shadow-md'
+                      : 'bg-slate-800 text-slate-200 rounded-bl-none border border-slate-700 shadow-inner'
                   }`}
                 >
                   {msg.content}
@@ -166,9 +219,9 @@ export default function AIChatWidget() {
             {loading && (
               <div className="flex justify-start">
                 <div className="bg-slate-800 text-slate-400 p-3.5 rounded-2xl text-xs rounded-bl-none border border-slate-700 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-bounce"></span>
+                  <span className="w-1.5 h-1.5 bg-fuchsia-400 rounded-full animate-bounce"></span>
                   <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
-                  <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+                  <span className="w-1.5 h-1.5 bg-violet-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
                 </div>
               </div>
             )}
@@ -187,7 +240,7 @@ export default function AIChatWidget() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-cyan-600 hover:bg-cyan-500 disabled:opacity-50 text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+              className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 disabled:opacity-50 text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer shadow-lg shadow-cyan-500/20"
             >
               Send
             </button>
