@@ -4,14 +4,13 @@ import { GoogleGenAI } from '@google/genai';
 export async function POST(req: Request) {
   try {
     const apiKey = process.env.GEMINI_API_KEY;
+    console.log('GEMINI_API_KEY:', apiKey); // Debugging line to check if the API key is being read correctly
 
     if (!apiKey) {
       return NextResponse.json(
-<<<<<<< HEAD
+
         { reply: 'Configuration Error: GEMINI_API_KEY is missing from environment variables.' },
-=======
-        { reply: 'Configuration Error: GEMINI_API_KEY is missing from .env.local' },
->>>>>>> bc11b9a0e7b6e6e571d96867e7f6ab494a1ceb0b
+
         { status: 500 }
       );
     }
