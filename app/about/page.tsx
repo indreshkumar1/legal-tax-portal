@@ -1,101 +1,121 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Eyebrow, SectionHeader } from '@/components/section';
+import { ArrowRightIcon, ClockIcon, practiceIcons } from '@/components/icons';
+
+export const metadata: Metadata = {
+  title: 'About | TriWise Partners',
+  description: 'Precision, confidentiality and strategic foresight in corporate law, secretarial governance and taxation.',
+};
+
+const pillars = [
+  {
+    title: 'Rigorous compliance',
+    body: 'Proactive identification of regulatory shifts under the Companies Act, SEBI, and tax authorities.',
+  },
+  {
+    title: 'Absolute confidentiality',
+    body: 'Strict data privacy protocols and professional ethics protecting sensitive corporate data.',
+  },
+  {
+    title: 'Strategic execution',
+    body: 'End-to-end liaisoning and coordination with regulatory bodies including MCA, NCLT, and RBI.',
+  },
+];
+
+const principles = [
+  {
+    icon: practiceIcons.search,
+    title: 'Precision & accuracy',
+    body: 'Meticulous drafting, review, and filing to eliminate procedural defaults and legal vulnerabilities.',
+  },
+  {
+    icon: ClockIcon,
+    title: 'Agility & timeliness',
+    body: 'Strict adherence to statutory timelines and responsive communication for time-sensitive corporate events.',
+  },
+  {
+    icon: practiceIcons.users,
+    title: 'Client-centric partnership',
+    body: 'Long-term professional relationships rooted in trust, transparency, and deep industry insight.',
+  },
+];
+
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-800">
-      {/* Navigation Header */}
-      <nav className="bg-white border-b border-slate-200 py-4 px-8 flex justify-between items-center shadow-sm sticky top-0 z-50">
-        <a href="/" className="font-bold text-xl text-slate-900">
-          YourFirmName <span className="text-blue-600">Advisors</span>
-        </a>
-        <div className="space-x-6 text-sm font-medium text-slate-600 flex items-center">
-          <a href="/" className="hover:text-blue-600">Home</a>
-          <a href="/#services" className="hover:text-blue-600">Services</a>
-          <a href="/#contact" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Book Consultation</a>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="py-20 px-8 text-center bg-gradient-to-b from-white to-slate-100 border-b border-slate-200">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-6">
-            About Our Practice
+    <main>
+      <section className="relative overflow-hidden border-b border-line">
+        <div className="bg-grid pointer-events-none absolute inset-0" />
+        <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-16 sm:px-8 sm:pt-24">
+          <Eyebrow>About our practice</Eyebrow>
+          <h1 className="mt-6 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-[-0.04em] sm:text-6xl">
+            Trusted counsel for complex regulatory landscapes.
           </h1>
-          <p className="text-lg text-slate-600 leading-relaxed">
-            Delivering precision, uncompromising confidentiality, and strategic foresight in corporate law, secretarial governance, and taxation.
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-fg-muted">
+            Precision, uncompromising confidentiality and strategic foresight in corporate law, secretarial governance and
+            taxation.
           </p>
         </div>
       </section>
 
-      {/* Firm Overview / Philosophy */}
-      <section className="py-16 px-8 max-w-5xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      <section className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-28">
+        <div className="grid gap-14 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+          <div className="max-w-xl space-y-5 text-base leading-relaxed text-fg-muted">
+            <p className="text-xl leading-relaxed tracking-[-0.01em] text-fg">
+              In an evolving corporate and regulatory environment, businesses need more than compliance. They need advisory
+              that safeguards operations and fuels growth.
+            </p>
+            <p>
+              Our firm brings together multi-disciplinary expertise across company law, SEBI regulations, direct and indirect
+              taxation, and cross-border FEMA frameworks to deliver holistic solutions for startups, enterprises and listed
+              entities.
+            </p>
+          </div>
+          <ul className="divide-y divide-line rounded-xl border border-line">
+            {pillars.map((p, i) => (
+              <li key={p.title} className="flex gap-5 p-6">
+                <span className="font-mono text-xs text-fg-subtle">0{i + 1}</span>
+                <div>
+                  <h2 className="text-base font-semibold tracking-tight">{p.title}</h2>
+                  <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{p.body}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="border-y border-line bg-subtle">
+        <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-28">
+          <SectionHeader eyebrow="Principles" title="What guides every engagement" />
+          <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-3">
+            {principles.map((p) => (
+              <div key={p.title} className="group bg-bg p-8 transition-colors hover:bg-subtle">
+                <p.icon className="h-5 w-5 text-fg-subtle transition-colors group-hover:text-accent" />
+                <h3 className="mt-6 text-base font-semibold tracking-tight">{p.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-fg-muted">{p.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
+        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
           <div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">Trusted Counsel for Complex Regulatory Landscapes</h2>
-            <p className="text-slate-600 leading-relaxed mb-4">
-              In an evolving corporate and regulatory environment, businesses require more than just compliance—they require strategic advisory that safeguards operations and fuels growth. 
-            </p>
-            <p className="text-slate-600 leading-relaxed">
-              Our firm brings together multi-disciplinary expertise across company law, SEBI regulations, direct-indirect taxation, and cross-border FEMA frameworks to deliver holistic solutions tailored to startups, enterprises, and listed entities.
+            <h2 className="text-3xl font-semibold tracking-[-0.03em]">Ready to secure your corporate compliance?</h2>
+            <p className="mt-3 max-w-xl text-base leading-relaxed text-fg-muted">
+              Consult our professionals for guidance on your legal, tax and secretarial requirements.
             </p>
           </div>
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
-            <div className="border-l-4 border-blue-600 pl-4">
-              <h3 className="font-semibold text-slate-900 text-lg">Rigorous Compliance</h3>
-              <p className="text-slate-600 text-sm mt-1">Proactive identification of regulatory shifts under the Companies Act, SEBI, and tax authorities.</p>
-            </div>
-            <div className="border-l-4 border-blue-600 pl-4">
-              <h3 className="font-semibold text-slate-900 text-lg">Absolute Confidentiality</h3>
-              <p className="text-slate-600 text-sm mt-1">Strict data privacy protocols and professional ethics protecting sensitive corporate data.</p>
-            </div>
-            <div className="border-l-4 border-blue-600 pl-4">
-              <h3 className="font-semibold text-slate-900 text-lg">Strategic Execution</h3>
-              <p className="text-slate-600 text-sm mt-1">End-to-end liaisoning and coordination with regulatory bodies including MCA, NCLT, and RBI.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Core Values Section */}
-      <section className="py-16 px-8 bg-white border-t border-b border-slate-200">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-slate-900 mb-12">Our Core Principles</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-6 bg-slate-50 rounded-xl border border-slate-100">
-              <div className="text-3xl mb-3">🎯</div>
-              <h3 className="font-semibold text-lg text-slate-900 mb-2">Precision & Accuracy</h3>
-              <p className="text-slate-600 text-sm">Meticulous drafting, review, and filing to eliminate procedural defaults and legal vulnerabilities.</p>
-            </div>
-            <div className="p-6 bg-slate-50 rounded-xl border border-slate-100">
-              <div className="text-3xl mb-3">⚡</div>
-              <h3 className="font-semibold text-lg text-slate-900 mb-2">Agility & Timeliness</h3>
-              <p className="text-slate-600 text-sm">Strict adherence to statutory timelines and responsive communication for time-sensitive corporate events.</p>
-            </div>
-            <div className="p-6 bg-slate-50 rounded-xl border border-slate-100">
-              <div className="text-3xl mb-3">🤝</div>
-              <h3 className="font-semibold text-lg text-slate-900 mb-2">Client-Centric Partnership</h3>
-              <p className="text-slate-600 text-sm">Building long-term professional relationships rooted in trust, transparency, and deep industry insight.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="py-20 px-8 text-center bg-slate-900 text-white">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4">Ready to Secure Your Corporate Compliance?</h2>
-          <p className="text-slate-400 mb-8">Consult with our professionals for expert guidance on your legal, tax, and secretarial requirements.</p>
-          <a 
-            href="/#contact" 
-            className="bg-blue-600 text-white font-medium px-8 py-3 rounded-xl shadow-lg hover:bg-blue-700 transition inline-block"
+          <Link
+            href="/#contact"
+            className="inline-flex h-11 shrink-0 items-center gap-2 rounded-md bg-fg px-5 text-sm font-medium text-bg transition-opacity hover:opacity-85 active:scale-[0.98]"
           >
-            Schedule a Consultation
-          </a>
+            Schedule a consultation <ArrowRightIcon className="h-4 w-4" />
+          </Link>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-slate-950 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
-        <p>© {new Date().getFullYear()} YourFirmName Advisors. All rights reserved. Professional Confidentiality Guaranteed.</p>
-      </footer>
     </main>
   );
 }
